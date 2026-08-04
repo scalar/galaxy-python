@@ -18,9 +18,9 @@ pip install scalar-galaxy
 ```python
 import os
 
-from scalar_galaxy import ScalarGalaxy
+from scalar_galaxy import Galaxy
 
-client = ScalarGalaxy(
+client = Galaxy(
     bearer_auth=os.environ.get("BEARER_AUTH"),
 )
 ```
@@ -40,9 +40,9 @@ Provide credentials using the options below. Environment variables are read auto
 ```python
 import os
 
-from scalar_galaxy import ScalarGalaxy
+from scalar_galaxy import Galaxy
 
-client = ScalarGalaxy(
+client = Galaxy(
     bearer_auth=os.environ.get("BEARER_AUTH"),
 )
 

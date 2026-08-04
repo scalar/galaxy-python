@@ -24,7 +24,7 @@ from ._types import (
 )
 from ._utils import is_given, is_mapping_t, get_async_library
 from ._compat import cached_property
-from ._exceptions import APIStatusError, ScalarGalaxyError
+from ._exceptions import APIStatusError, GalaxyError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -49,10 +49,10 @@ ENVIRONMENTS: dict[str, str] = {
     "responds_with_your_request_data": "{protocol}://void.scalar.com/{path}",
 }
 
-__all__ = ["ENVIRONMENTS", "ScalarGalaxy", "AsyncScalarGalaxy", "Client", "AsyncClient", "Timeout", "Transport", "ProxiesTypes", "RequestOptions"]
+__all__ = ["ENVIRONMENTS", "Galaxy", "AsyncGalaxy", "Client", "AsyncClient", "Timeout", "Transport", "ProxiesTypes", "RequestOptions"]
 
 
-class ScalarGalaxy(SyncAPIClient):
+class Galaxy(SyncAPIClient):
     # client options
     bearer_auth: str
     basic_auth_username: str
@@ -96,7 +96,7 @@ class ScalarGalaxy(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous ScalarGalaxy client instance.
+        """Construct a new synchronous Galaxy client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_auth` from `BEARER_AUTH`
@@ -110,42 +110,42 @@ class ScalarGalaxy(SyncAPIClient):
         if bearer_auth is None:
             bearer_auth = os.environ.get("BEARER_AUTH")
         if bearer_auth is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The bearer_auth client option must be set either by passing bearer_auth to the client or by setting the BEARER_AUTH environment variable"
             )
         self.bearer_auth = bearer_auth
         if basic_auth_username is None:
             basic_auth_username = os.environ.get("BASIC_AUTH_USERNAME")
         if basic_auth_username is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The basic_auth_username client option must be set either by passing basic_auth_username to the client or by setting the BASIC_AUTH_USERNAME environment variable"
             )
         self.basic_auth_username = basic_auth_username
         if basic_auth_password is None:
             basic_auth_password = os.environ.get("BASIC_AUTH_PASSWORD")
         if basic_auth_password is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The basic_auth_password client option must be set either by passing basic_auth_password to the client or by setting the BASIC_AUTH_PASSWORD environment variable"
             )
         self.basic_auth_password = basic_auth_password
         if api_key_header is None:
             api_key_header = os.environ.get("API_KEY_HEADER")
         if api_key_header is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The api_key_header client option must be set either by passing api_key_header to the client or by setting the API_KEY_HEADER environment variable"
             )
         self.api_key_header = api_key_header
         if api_key_query is None:
             api_key_query = os.environ.get("API_KEY_QUERY")
         if api_key_query is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The api_key_query client option must be set either by passing api_key_query to the client or by setting the API_KEY_QUERY environment variable"
             )
         self.api_key_query = api_key_query
         if api_key_cookie is None:
             api_key_cookie = os.environ.get("API_KEY_COOKIE")
         if api_key_cookie is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The api_key_cookie client option must be set either by passing api_key_cookie to the client or by setting the API_KEY_COOKIE environment variable"
             )
         self.api_key_cookie = api_key_cookie
@@ -228,12 +228,12 @@ class ScalarGalaxy(SyncAPIClient):
         return WebhooksResource(self)
 
     @cached_property
-    def with_raw_response(self) -> ScalarGalaxyWithRawResponse:
-        return ScalarGalaxyWithRawResponse(self)
+    def with_raw_response(self) -> GalaxyWithRawResponse:
+        return GalaxyWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> ScalarGalaxyWithStreamedResponse:
-        return ScalarGalaxyWithStreamedResponse(self)
+    def with_streaming_response(self) -> GalaxyWithStreamedResponse:
+        return GalaxyWithStreamedResponse(self)
 
     @property
     @override
@@ -436,7 +436,7 @@ class ScalarGalaxy(SyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class AsyncScalarGalaxy(AsyncAPIClient):
+class AsyncGalaxy(AsyncAPIClient):
     # client options
     bearer_auth: str
     basic_auth_username: str
@@ -480,7 +480,7 @@ class AsyncScalarGalaxy(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async AsyncScalarGalaxy client instance.
+        """Construct a new async AsyncGalaxy client instance.
 
         This automatically infers the following arguments from their corresponding environment variables if they are not provided:
         - `bearer_auth` from `BEARER_AUTH`
@@ -494,42 +494,42 @@ class AsyncScalarGalaxy(AsyncAPIClient):
         if bearer_auth is None:
             bearer_auth = os.environ.get("BEARER_AUTH")
         if bearer_auth is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The bearer_auth client option must be set either by passing bearer_auth to the client or by setting the BEARER_AUTH environment variable"
             )
         self.bearer_auth = bearer_auth
         if basic_auth_username is None:
             basic_auth_username = os.environ.get("BASIC_AUTH_USERNAME")
         if basic_auth_username is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The basic_auth_username client option must be set either by passing basic_auth_username to the client or by setting the BASIC_AUTH_USERNAME environment variable"
             )
         self.basic_auth_username = basic_auth_username
         if basic_auth_password is None:
             basic_auth_password = os.environ.get("BASIC_AUTH_PASSWORD")
         if basic_auth_password is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The basic_auth_password client option must be set either by passing basic_auth_password to the client or by setting the BASIC_AUTH_PASSWORD environment variable"
             )
         self.basic_auth_password = basic_auth_password
         if api_key_header is None:
             api_key_header = os.environ.get("API_KEY_HEADER")
         if api_key_header is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The api_key_header client option must be set either by passing api_key_header to the client or by setting the API_KEY_HEADER environment variable"
             )
         self.api_key_header = api_key_header
         if api_key_query is None:
             api_key_query = os.environ.get("API_KEY_QUERY")
         if api_key_query is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The api_key_query client option must be set either by passing api_key_query to the client or by setting the API_KEY_QUERY environment variable"
             )
         self.api_key_query = api_key_query
         if api_key_cookie is None:
             api_key_cookie = os.environ.get("API_KEY_COOKIE")
         if api_key_cookie is None:
-            raise ScalarGalaxyError(
+            raise GalaxyError(
                 "The api_key_cookie client option must be set either by passing api_key_cookie to the client or by setting the API_KEY_COOKIE environment variable"
             )
         self.api_key_cookie = api_key_cookie
@@ -612,12 +612,12 @@ class AsyncScalarGalaxy(AsyncAPIClient):
         return AsyncWebhooksResource(self)
 
     @cached_property
-    def with_raw_response(self) -> AsyncScalarGalaxyWithRawResponse:
-        return AsyncScalarGalaxyWithRawResponse(self)
+    def with_raw_response(self) -> AsyncGalaxyWithRawResponse:
+        return AsyncGalaxyWithRawResponse(self)
 
     @cached_property
-    def with_streaming_response(self) -> AsyncScalarGalaxyWithStreamedResponse:
-        return AsyncScalarGalaxyWithStreamedResponse(self)
+    def with_streaming_response(self) -> AsyncGalaxyWithStreamedResponse:
+        return AsyncGalaxyWithStreamedResponse(self)
 
     @property
     @override
@@ -820,10 +820,10 @@ class AsyncScalarGalaxy(AsyncAPIClient):
         return APIStatusError(err_msg, response=response, body=body)
 
 
-class ScalarGalaxyWithRawResponse:
-    _client: ScalarGalaxy
+class GalaxyWithRawResponse:
+    _client: Galaxy
 
-    def __init__(self, client: ScalarGalaxy) -> None:
+    def __init__(self, client: Galaxy) -> None:
         self._client = client
 
     @cached_property
@@ -845,10 +845,10 @@ class ScalarGalaxyWithRawResponse:
         return AuthenticationResourceWithRawResponse(self._client.authentication)
 
 
-class AsyncScalarGalaxyWithRawResponse:
-    _client: AsyncScalarGalaxy
+class AsyncGalaxyWithRawResponse:
+    _client: AsyncGalaxy
 
-    def __init__(self, client: AsyncScalarGalaxy) -> None:
+    def __init__(self, client: AsyncGalaxy) -> None:
         self._client = client
 
     @cached_property
@@ -870,10 +870,10 @@ class AsyncScalarGalaxyWithRawResponse:
         return AsyncAuthenticationResourceWithRawResponse(self._client.authentication)
 
 
-class ScalarGalaxyWithStreamedResponse:
-    _client: ScalarGalaxy
+class GalaxyWithStreamedResponse:
+    _client: Galaxy
 
-    def __init__(self, client: ScalarGalaxy) -> None:
+    def __init__(self, client: Galaxy) -> None:
         self._client = client
 
     @cached_property
@@ -895,10 +895,10 @@ class ScalarGalaxyWithStreamedResponse:
         return AuthenticationResourceWithStreamingResponse(self._client.authentication)
 
 
-class AsyncScalarGalaxyWithStreamedResponse:
-    _client: AsyncScalarGalaxy
+class AsyncGalaxyWithStreamedResponse:
+    _client: AsyncGalaxy
 
-    def __init__(self, client: AsyncScalarGalaxy) -> None:
+    def __init__(self, client: AsyncGalaxy) -> None:
         self._client = client
 
     @cached_property
@@ -921,5 +921,5 @@ class AsyncScalarGalaxyWithStreamedResponse:
 
 
 # Alias names for the documented `Client` / `AsyncClient` symbols.
-Client = ScalarGalaxy
-AsyncClient = AsyncScalarGalaxy
+Client = Galaxy
+AsyncClient = AsyncGalaxy

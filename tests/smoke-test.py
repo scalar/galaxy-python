@@ -14,11 +14,11 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any, Callable, TypedDict
 
-from scalar_galaxy import ScalarGalaxy
+from scalar_galaxy import Galaxy
 
 # The shared smoke-test runner injects base URL and credentials through the same
 # environment variables the generated client reads in normal use.
-client = ScalarGalaxy(max_retries=0, timeout=30)
+client = Galaxy(max_retries=0, timeout=30)
 
 
 class SmokeResult(TypedDict, total=False):

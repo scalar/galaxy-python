@@ -7,7 +7,7 @@ from typing import Mapping, cast
 
 from .._models import construct_type
 from .._resource import SyncAPIResource, AsyncAPIResource
-from .._exceptions import ScalarGalaxyError
+from .._exceptions import GalaxyError
 from ..types.parsed_webhook_event import ParsedWebhookEvent
 
 __all__ = ["WebhooksResource", "AsyncWebhooksResource"]
@@ -18,7 +18,7 @@ class WebhooksResource(SyncAPIResource):
         try:
             from standardwebhooks import Webhook
         except ImportError as exc:
-            raise ScalarGalaxyError("You need to install `scalar-galaxy[webhooks]` to use this method") from exc
+            raise GalaxyError("You need to install `scalar-galaxy[webhooks]` to use this method") from exc
 
         if key is None:
             key = self._client.webhook_secret
@@ -46,7 +46,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         try:
             from standardwebhooks import Webhook
         except ImportError as exc:
-            raise ScalarGalaxyError("You need to install `scalar-galaxy[webhooks]` to use this method") from exc
+            raise GalaxyError("You need to install `scalar-galaxy[webhooks]` to use this method") from exc
 
         if key is None:
             key = self._client.webhook_secret

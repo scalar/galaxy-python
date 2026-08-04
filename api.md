@@ -23,9 +23,9 @@ Complete reference of every operation, grouped by resource. See [the README](./R
 ```python
 import os
 
-from scalar_galaxy import ScalarGalaxy
+from scalar_galaxy import Galaxy
 
-client = ScalarGalaxy(
+client = Galaxy(
     bearer_auth=os.environ.get("BEARER_AUTH"),
 )
 ```

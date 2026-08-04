@@ -12,7 +12,7 @@ import httpx
 from ._utils import extract_type_var_from_base
 
 if TYPE_CHECKING:
-    from ._client import ScalarGalaxy, AsyncScalarGalaxy
+    from ._client import Galaxy, AsyncGalaxy
     from ._models import FinalRequestOptions
 
 
@@ -31,7 +31,7 @@ class Stream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
-        client: ScalarGalaxy,
+        client: Galaxy,
         options: Optional[FinalRequestOptions] = None,
     ) -> None:
         self.response = response
@@ -127,7 +127,7 @@ class AsyncStream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
-        client: AsyncScalarGalaxy,
+        client: AsyncGalaxy,
         options: Optional[FinalRequestOptions] = None,
     ) -> None:
         self.response = response

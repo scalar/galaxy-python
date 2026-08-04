@@ -35,9 +35,9 @@ pip install scalar-galaxy
 ```python
 import os
 
-from scalar_galaxy import ScalarGalaxy
+from scalar_galaxy import Galaxy
 
-client = ScalarGalaxy(
+client = Galaxy(
     bearer_auth=os.environ.get("BEARER_AUTH"),
 )
 
@@ -56,15 +56,15 @@ See the [API reference](./api.md) for every available operation.
 
 ## Async
 
-Every client has an `Async` counterpart (`AsyncScalarGalaxy`) exposing the same resource tree with `await`.
+Every client has an `Async` counterpart (`AsyncGalaxy`) exposing the same resource tree with `await`.
 
 ```python
 import asyncio
 
-from scalar_galaxy import AsyncScalarGalaxy
+from scalar_galaxy import AsyncGalaxy
 
 async def main() -> None:
-    client = AsyncScalarGalaxy()
+    client = AsyncGalaxy()
     planet = await client.planets.list_all_data(
         limit=10,
         offset=0,
@@ -127,9 +127,9 @@ Documented error statuses: `400`, `401`, `403`, `404`, `409`, `422`, `429`.
 Configure the generated client by setting any of these options when you create it.
 
 ```python
-from scalar_galaxy import ScalarGalaxy
+from scalar_galaxy import Galaxy
 
-client = ScalarGalaxy(
+client = Galaxy(
     timeout=60.0,
     max_retries=2,
 )

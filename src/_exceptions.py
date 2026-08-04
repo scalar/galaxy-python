@@ -21,11 +21,11 @@ __all__ = [
 ]
 
 
-class ScalarGalaxyError(Exception):
+class GalaxyError(Exception):
     pass
 
 
-class APIError(ScalarGalaxyError):
+class APIError(GalaxyError):
     message: str
     request: httpx.Request
 
@@ -115,7 +115,7 @@ class InternalServerError(APIStatusError):
     pass
 
 
-class WebSocketConnectionClosedError(ScalarGalaxyError):
+class WebSocketConnectionClosedError(GalaxyError):
     """Raised when a WebSocket connection closes with unsent messages."""
 
     unsent_messages: list[str]
@@ -125,7 +125,7 @@ class WebSocketConnectionClosedError(ScalarGalaxyError):
         self.unsent_messages = unsent_messages
 
 
-class WebSocketQueueFullError(ScalarGalaxyError):
+class WebSocketQueueFullError(GalaxyError):
     """Raised when the outgoing WebSocket message queue exceeds its byte-size limit."""
 
     pass
