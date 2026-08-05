@@ -50,6 +50,7 @@ planet = client.planets.list_all_data(
     limit=10,
     offset=0,
 )
+
 print(planet)
 ```
 
