@@ -12,10 +12,19 @@ from .._utils import PropertyInfo
 from .planet_param import PlanetParam
 from .user_param import UserParam
 
-__all__ = ["CelestialBodyCreateParams", "Planet", "PlanetPhysicalProperties", "PlanetPhysicalPropertiesTemperature", "PlanetAtmosphere", "PlanetSatellite", "Satellite", "SatelliteOrbit"]
+__all__ = [
+    "CelestialBodyCreateParams",
+    "Planet",
+    "PlanetPhysicalProperties",
+    "PlanetPhysicalPropertiesTemperature",
+    "PlanetAtmosphere",
+    "PlanetSatellite",
+    "Satellite",
+    "SatelliteOrbit",
+]
+
 
 class SatelliteOrbit(TypedDict, total=False):
-
     planet: PlanetParam
     """A planet in the Scalar Galaxy"""
 
@@ -25,8 +34,8 @@ class SatelliteOrbit(TypedDict, total=False):
     distance: float
     """Average distance from the planet in kilometers"""
 
-class Satellite(TypedDict, total=False):
 
+class Satellite(TypedDict, total=False):
     name: Required[str]
 
     description: Optional[str]
@@ -37,9 +46,9 @@ class Satellite(TypedDict, total=False):
     type: Literal["moon", "asteroid", "comet"]
 
     orbit: SatelliteOrbit
+
 
 class PlanetSatellite(TypedDict, total=False):
-
     name: Required[str]
 
     description: Optional[str]
@@ -51,14 +60,14 @@ class PlanetSatellite(TypedDict, total=False):
 
     orbit: SatelliteOrbit
 
-class PlanetAtmosphere(TypedDict, total=False):
 
+class PlanetAtmosphere(TypedDict, total=False):
     compound: str
 
     percentage: float
 
-class PlanetPhysicalPropertiesTemperature(TypedDict, total=False):
 
+class PlanetPhysicalPropertiesTemperature(TypedDict, total=False):
     min: float
     """Minimum temperature in Kelvin"""
 
@@ -68,8 +77,8 @@ class PlanetPhysicalPropertiesTemperature(TypedDict, total=False):
     average: float
     """Average temperature in Kelvin"""
 
-class PlanetPhysicalProperties(TypedDict, total=False):
 
+class PlanetPhysicalProperties(TypedDict, total=False):
     mass: float
     """Mass in Earth masses (must be greater than 0)"""
 
@@ -81,8 +90,8 @@ class PlanetPhysicalProperties(TypedDict, total=False):
 
     temperature: PlanetPhysicalPropertiesTemperature
 
-class Planet(TypedDict, total=False):
 
+class Planet(TypedDict, total=False):
     name: Required[str]
 
     description: Optional[str]
@@ -113,7 +122,6 @@ class Planet(TypedDict, total=False):
 
     failure_callback_url: Annotated[str, PropertyInfo(alias="failureCallbackUrl")]
     """URL which gets invoked upon a failed operation"""
-
 
 
 CelestialBodyCreateParams: TypeAlias = Union[Planet, Satellite]

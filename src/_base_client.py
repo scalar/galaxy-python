@@ -1831,9 +1831,7 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
         options: FinalRequestOptions,
         cursor_config: Optional[CursorPageConfig] = None,
     ) -> AsyncPaginator[_T, AsyncPageT]:
-        return AsyncPaginator(
-            client=self, options=options, page_cls=page, model=model, cursor_config=cursor_config
-        )
+        return AsyncPaginator(client=self, options=options, page_cls=page, model=model, cursor_config=cursor_config)
 
     @overload
     async def get(

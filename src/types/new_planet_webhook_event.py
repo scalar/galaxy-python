@@ -14,13 +14,12 @@ __all__ = ["NewPlanetWebhookEvent", "PhysicalProperties", "PhysicalPropertiesTem
 
 
 class Atmosphere(BaseModel):
-
     compound: Optional[str] = None
 
     percentage: Optional[float] = None
 
-class PhysicalPropertiesTemperature(BaseModel):
 
+class PhysicalPropertiesTemperature(BaseModel):
     min: Optional[float] = None
     """Minimum temperature in Kelvin"""
 
@@ -30,8 +29,8 @@ class PhysicalPropertiesTemperature(BaseModel):
     average: Optional[float] = None
     """Average temperature in Kelvin"""
 
-class PhysicalProperties(BaseModel):
 
+class PhysicalProperties(BaseModel):
     mass: Optional[float] = None
     """Mass in Earth masses (must be greater than 0)"""
 
@@ -44,9 +43,7 @@ class PhysicalProperties(BaseModel):
     temperature: Optional[PhysicalPropertiesTemperature] = None
 
 
-
 class NewPlanetWebhookEvent(BaseModel):
-
     id: int
 
     name: str

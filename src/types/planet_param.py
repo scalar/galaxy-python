@@ -15,7 +15,6 @@ __all__ = ["PlanetParam", "PhysicalProperties", "PhysicalPropertiesTemperature",
 
 
 class PlanetParam(TypedDict, total=False):
-
     name: Required[str]
 
     description: Optional[str]
@@ -49,13 +48,12 @@ class PlanetParam(TypedDict, total=False):
 
 
 class Atmosphere(TypedDict, total=False):
-
     compound: str
 
     percentage: float
 
-class PhysicalPropertiesTemperature(TypedDict, total=False):
 
+class PhysicalPropertiesTemperature(TypedDict, total=False):
     min: float
     """Minimum temperature in Kelvin"""
 
@@ -65,8 +63,8 @@ class PhysicalPropertiesTemperature(TypedDict, total=False):
     average: float
     """Average temperature in Kelvin"""
 
-class PhysicalProperties(TypedDict, total=False):
 
+class PhysicalProperties(TypedDict, total=False):
     mass: float
     """Mass in Earth masses (must be greater than 0)"""
 
@@ -77,4 +75,3 @@ class PhysicalProperties(TypedDict, total=False):
     """Surface gravity in Earth g"""
 
     temperature: PhysicalPropertiesTemperature
-

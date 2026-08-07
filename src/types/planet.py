@@ -16,13 +16,12 @@ __all__ = ["Planet", "PhysicalProperties", "PhysicalPropertiesTemperature", "Atm
 
 
 class Atmosphere(BaseModel):
-
     compound: Optional[str] = None
 
     percentage: Optional[float] = None
 
-class PhysicalPropertiesTemperature(BaseModel):
 
+class PhysicalPropertiesTemperature(BaseModel):
     min: Optional[float] = None
     """Minimum temperature in Kelvin"""
 
@@ -32,8 +31,8 @@ class PhysicalPropertiesTemperature(BaseModel):
     average: Optional[float] = None
     """Average temperature in Kelvin"""
 
-class PhysicalProperties(BaseModel):
 
+class PhysicalProperties(BaseModel):
     mass: Optional[float] = None
     """Mass in Earth masses (must be greater than 0)"""
 
@@ -44,7 +43,6 @@ class PhysicalProperties(BaseModel):
     """Surface gravity in Earth g"""
 
     temperature: Optional[PhysicalPropertiesTemperature] = None
-
 
 
 class Planet(BaseModel):

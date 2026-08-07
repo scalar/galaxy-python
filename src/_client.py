@@ -49,7 +49,17 @@ ENVIRONMENTS: dict[str, str] = {
     "responds_with_your_request_data": "{protocol}://void.scalar.com/{path}",
 }
 
-__all__ = ["ENVIRONMENTS", "Galaxy", "AsyncGalaxy", "Client", "AsyncClient", "Timeout", "Transport", "ProxiesTypes", "RequestOptions"]
+__all__ = [
+    "ENVIRONMENTS",
+    "Galaxy",
+    "AsyncGalaxy",
+    "Client",
+    "AsyncClient",
+    "Timeout",
+    "Transport",
+    "ProxiesTypes",
+    "RequestOptions",
+]
 
 
 class Galaxy(SyncAPIClient):
@@ -316,7 +326,6 @@ class Galaxy(SyncAPIClient):
             return {}
         return {"api_key": value}
 
-
     @property
     @override
     def default_headers(self) -> dict[str, str | Omit]:
@@ -346,8 +355,9 @@ class Galaxy(SyncAPIClient):
             return
         if cookies.get("api_key") is not None:
             return
-        raise TypeError("Could not resolve authentication method. Expected Authorization or X-API-Key or query api_key or cookie api_key to be set.")
-
+        raise TypeError(
+            "Could not resolve authentication method. Expected Authorization or X-API-Key or query api_key or cookie api_key to be set."
+        )
 
     def copy(
         self,
@@ -700,7 +710,6 @@ class AsyncGalaxy(AsyncAPIClient):
             return {}
         return {"api_key": value}
 
-
     @property
     @override
     def default_headers(self) -> dict[str, str | Omit]:
@@ -730,8 +739,9 @@ class AsyncGalaxy(AsyncAPIClient):
             return
         if cookies.get("api_key") is not None:
             return
-        raise TypeError("Could not resolve authentication method. Expected Authorization or X-API-Key or query api_key or cookie api_key to be set.")
-
+        raise TypeError(
+            "Could not resolve authentication method. Expected Authorization or X-API-Key or query api_key or cookie api_key to be set."
+        )
 
     def copy(
         self,

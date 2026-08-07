@@ -31,7 +31,6 @@ __all__ = ["PlanetsResource", "AsyncPlanetsResource"]
 
 
 class PlanetsResource(SyncAPIResource):
-
     @cached_property
     def with_raw_response(self) -> PlanetsResourceWithRawResponse:
         return PlanetsResourceWithRawResponse(self)
@@ -54,7 +53,7 @@ class PlanetsResource(SyncAPIResource):
     ) -> PlanetListAllDataResponse:
         """
         It's easy to say you know them all, but do you really? Retrieve all the planets and check whether you missed one.
-        
+
         Args:
             limit: The number of items to return
             offset: The number of items to skip before starting to collect the result set
@@ -62,10 +61,10 @@ class PlanetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             PlanetListAllDataResponse: OK
-        
+
         Example:
             ```python
             planet = client.planets.list_all_data(
@@ -76,7 +75,15 @@ class PlanetsResource(SyncAPIResource):
         """
         return self._get(
             "/planets",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=maybe_transform({"limit": limit, "offset": offset}, planet_list_all_data_params.PlanetListAllDataParams)),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=maybe_transform(
+                    {"limit": limit, "offset": offset}, planet_list_all_data_params.PlanetListAllDataParams
+                ),
+            ),
             cast_to=PlanetListAllDataResponse,
         )
 
@@ -105,7 +112,7 @@ class PlanetsResource(SyncAPIResource):
     ) -> Planet:
         """
         Time to play god and create a new planet. What do you think? Ah, don't think too much. What could go wrong anyway?
-        
+
         Args:
             name: Body parameter.
             description: Body parameter.
@@ -124,10 +131,10 @@ class PlanetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             Planet: Created
-        
+
         Example:
             ```python
             planet = client.planets.create(
@@ -138,24 +145,26 @@ class PlanetsResource(SyncAPIResource):
         return self._post(
             "/planets",
             body=maybe_transform(
-            {
-            "name": name,
-            "description": description,
-            "type": type,
-            "habitability_index": habitability_index,
-            "physical_properties": physical_properties,
-            "atmosphere": atmosphere,
-            "discovered_at": discovered_at,
-            "image": image,
-            "satellites": satellites,
-            "creator": creator,
-            "tags": tags,
-            "success_callback_url": success_callback_url,
-            "failure_callback_url": failure_callback_url,
-        },
-            planet_create_params.PlanetCreateParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "name": name,
+                    "description": description,
+                    "type": type,
+                    "habitability_index": habitability_index,
+                    "physical_properties": physical_properties,
+                    "atmosphere": atmosphere,
+                    "discovered_at": discovered_at,
+                    "image": image,
+                    "satellites": satellites,
+                    "creator": creator,
+                    "tags": tags,
+                    "success_callback_url": success_callback_url,
+                    "failure_callback_url": failure_callback_url,
+                },
+                planet_create_params.PlanetCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=Planet,
         )
 
@@ -172,17 +181,17 @@ class PlanetsResource(SyncAPIResource):
     ) -> Planet:
         """
         You'll better learn a little bit more about the planets. It might come in handy once space travel is available for everyone.
-        
+
         Args:
             planet_id: The ID of the planet to get
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             Planet: Planet Found
-        
+
         Example:
             ```python
             planet = client.planets.retrieve(
@@ -194,7 +203,9 @@ class PlanetsResource(SyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `planet_id` but received {planet_id!r}")
         return self._get(
             path_template("/planets/{planetId}", **{"planetId": planet_id}),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=Planet,
         )
 
@@ -224,7 +235,7 @@ class PlanetsResource(SyncAPIResource):
     ) -> Planet:
         """
         Sometimes you make mistakes, that's fine. No worries, you can update all planets.
-        
+
         Args:
             planet_id: The ID of the planet to get
             name: Body parameter.
@@ -244,10 +255,10 @@ class PlanetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             Planet: Planet updated successfully
-        
+
         Example:
             ```python
             planet = client.planets.update(
@@ -261,24 +272,26 @@ class PlanetsResource(SyncAPIResource):
         return self._put(
             path_template("/planets/{planetId}", **{"planetId": planet_id}),
             body=maybe_transform(
-            {
-            "name": name,
-            "description": description,
-            "type": type,
-            "habitability_index": habitability_index,
-            "physical_properties": physical_properties,
-            "atmosphere": atmosphere,
-            "discovered_at": discovered_at,
-            "image": image,
-            "satellites": satellites,
-            "creator": creator,
-            "tags": tags,
-            "success_callback_url": success_callback_url,
-            "failure_callback_url": failure_callback_url,
-        },
-            planet_update_params.PlanetUpdateParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "name": name,
+                    "description": description,
+                    "type": type,
+                    "habitability_index": habitability_index,
+                    "physical_properties": physical_properties,
+                    "atmosphere": atmosphere,
+                    "discovered_at": discovered_at,
+                    "image": image,
+                    "satellites": satellites,
+                    "creator": creator,
+                    "tags": tags,
+                    "success_callback_url": success_callback_url,
+                    "failure_callback_url": failure_callback_url,
+                },
+                planet_update_params.PlanetUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=Planet,
         )
 
@@ -295,17 +308,17 @@ class PlanetsResource(SyncAPIResource):
     ) -> None:
         """
         This endpoint was used to delete planets. Unfortunately, that caused a lot of trouble for planets with life. So, this endpoint is now deprecated and should not be used anymore.
-        
+
         Args:
             planet_id: The ID of the planet to get
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             No Content
-        
+
         Example:
             ```python
             client.planets.delete(
@@ -318,7 +331,9 @@ class PlanetsResource(SyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return self._delete(
             path_template("/planets/{planetId}", **{"planetId": planet_id}),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=NoneType,
         )
 
@@ -336,7 +351,7 @@ class PlanetsResource(SyncAPIResource):
     ) -> PlanetUploadImageResponse:
         """
         Got a crazy good photo of a planet? Share it with the world!
-        
+
         Args:
             planet_id: The ID of the planet to get
             image: The image file to upload
@@ -344,10 +359,10 @@ class PlanetsResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             PlanetUploadImageResponse: Image uploaded
-        
+
         Example:
             ```python
             planet = client.planets.upload_image(
@@ -369,13 +384,14 @@ class PlanetsResource(SyncAPIResource):
             path_template("/planets/{planetId}/image", **{"planetId": planet_id}),
             body=maybe_transform(body, planet_upload_image_params.PlanetUploadImageParams),
             files=files,
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=PlanetUploadImageResponse,
         )
 
 
 class AsyncPlanetsResource(AsyncAPIResource):
-
     @cached_property
     def with_raw_response(self) -> AsyncPlanetsResourceWithRawResponse:
         return AsyncPlanetsResourceWithRawResponse(self)
@@ -398,7 +414,7 @@ class AsyncPlanetsResource(AsyncAPIResource):
     ) -> PlanetListAllDataResponse:
         """
         It's easy to say you know them all, but do you really? Retrieve all the planets and check whether you missed one.
-        
+
         Args:
             limit: The number of items to return
             offset: The number of items to skip before starting to collect the result set
@@ -406,10 +422,10 @@ class AsyncPlanetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             PlanetListAllDataResponse: OK
-        
+
         Example:
             ```python
             planet = await client.planets.list_all_data(
@@ -420,7 +436,15 @@ class AsyncPlanetsResource(AsyncAPIResource):
         """
         return await self._get(
             "/planets",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout, query=await async_maybe_transform({"limit": limit, "offset": offset}, planet_list_all_data_params.PlanetListAllDataParams)),
+            options=make_request_options(
+                extra_headers=extra_headers,
+                extra_query=extra_query,
+                extra_body=extra_body,
+                timeout=timeout,
+                query=await async_maybe_transform(
+                    {"limit": limit, "offset": offset}, planet_list_all_data_params.PlanetListAllDataParams
+                ),
+            ),
             cast_to=PlanetListAllDataResponse,
         )
 
@@ -449,7 +473,7 @@ class AsyncPlanetsResource(AsyncAPIResource):
     ) -> Planet:
         """
         Time to play god and create a new planet. What do you think? Ah, don't think too much. What could go wrong anyway?
-        
+
         Args:
             name: Body parameter.
             description: Body parameter.
@@ -468,10 +492,10 @@ class AsyncPlanetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             Planet: Created
-        
+
         Example:
             ```python
             planet = await client.planets.create(
@@ -482,24 +506,26 @@ class AsyncPlanetsResource(AsyncAPIResource):
         return await self._post(
             "/planets",
             body=await async_maybe_transform(
-            {
-            "name": name,
-            "description": description,
-            "type": type,
-            "habitability_index": habitability_index,
-            "physical_properties": physical_properties,
-            "atmosphere": atmosphere,
-            "discovered_at": discovered_at,
-            "image": image,
-            "satellites": satellites,
-            "creator": creator,
-            "tags": tags,
-            "success_callback_url": success_callback_url,
-            "failure_callback_url": failure_callback_url,
-        },
-            planet_create_params.PlanetCreateParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "name": name,
+                    "description": description,
+                    "type": type,
+                    "habitability_index": habitability_index,
+                    "physical_properties": physical_properties,
+                    "atmosphere": atmosphere,
+                    "discovered_at": discovered_at,
+                    "image": image,
+                    "satellites": satellites,
+                    "creator": creator,
+                    "tags": tags,
+                    "success_callback_url": success_callback_url,
+                    "failure_callback_url": failure_callback_url,
+                },
+                planet_create_params.PlanetCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=Planet,
         )
 
@@ -516,17 +542,17 @@ class AsyncPlanetsResource(AsyncAPIResource):
     ) -> Planet:
         """
         You'll better learn a little bit more about the planets. It might come in handy once space travel is available for everyone.
-        
+
         Args:
             planet_id: The ID of the planet to get
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             Planet: Planet Found
-        
+
         Example:
             ```python
             planet = await client.planets.retrieve(
@@ -538,7 +564,9 @@ class AsyncPlanetsResource(AsyncAPIResource):
             raise ValueError(f"Expected a non-empty value for `planet_id` but received {planet_id!r}")
         return await self._get(
             path_template("/planets/{planetId}", **{"planetId": planet_id}),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=Planet,
         )
 
@@ -568,7 +596,7 @@ class AsyncPlanetsResource(AsyncAPIResource):
     ) -> Planet:
         """
         Sometimes you make mistakes, that's fine. No worries, you can update all planets.
-        
+
         Args:
             planet_id: The ID of the planet to get
             name: Body parameter.
@@ -588,10 +616,10 @@ class AsyncPlanetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             Planet: Planet updated successfully
-        
+
         Example:
             ```python
             planet = await client.planets.update(
@@ -605,24 +633,26 @@ class AsyncPlanetsResource(AsyncAPIResource):
         return await self._put(
             path_template("/planets/{planetId}", **{"planetId": planet_id}),
             body=await async_maybe_transform(
-            {
-            "name": name,
-            "description": description,
-            "type": type,
-            "habitability_index": habitability_index,
-            "physical_properties": physical_properties,
-            "atmosphere": atmosphere,
-            "discovered_at": discovered_at,
-            "image": image,
-            "satellites": satellites,
-            "creator": creator,
-            "tags": tags,
-            "success_callback_url": success_callback_url,
-            "failure_callback_url": failure_callback_url,
-        },
-            planet_update_params.PlanetUpdateParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "name": name,
+                    "description": description,
+                    "type": type,
+                    "habitability_index": habitability_index,
+                    "physical_properties": physical_properties,
+                    "atmosphere": atmosphere,
+                    "discovered_at": discovered_at,
+                    "image": image,
+                    "satellites": satellites,
+                    "creator": creator,
+                    "tags": tags,
+                    "success_callback_url": success_callback_url,
+                    "failure_callback_url": failure_callback_url,
+                },
+                planet_update_params.PlanetUpdateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=Planet,
         )
 
@@ -639,17 +669,17 @@ class AsyncPlanetsResource(AsyncAPIResource):
     ) -> None:
         """
         This endpoint was used to delete planets. Unfortunately, that caused a lot of trouble for planets with life. So, this endpoint is now deprecated and should not be used anymore.
-        
+
         Args:
             planet_id: The ID of the planet to get
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             No Content
-        
+
         Example:
             ```python
             await client.planets.delete(
@@ -662,7 +692,9 @@ class AsyncPlanetsResource(AsyncAPIResource):
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
         return await self._delete(
             path_template("/planets/{planetId}", **{"planetId": planet_id}),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=NoneType,
         )
 
@@ -680,7 +712,7 @@ class AsyncPlanetsResource(AsyncAPIResource):
     ) -> PlanetUploadImageResponse:
         """
         Got a crazy good photo of a planet? Share it with the world!
-        
+
         Args:
             planet_id: The ID of the planet to get
             image: The image file to upload
@@ -688,10 +720,10 @@ class AsyncPlanetsResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             PlanetUploadImageResponse: Image uploaded
-        
+
         Example:
             ```python
             planet = await client.planets.upload_image(
@@ -713,7 +745,9 @@ class AsyncPlanetsResource(AsyncAPIResource):
             path_template("/planets/{planetId}/image", **{"planetId": planet_id}),
             body=await async_maybe_transform(body, planet_upload_image_params.PlanetUploadImageParams),
             files=files,
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=PlanetUploadImageResponse,
         )
 
