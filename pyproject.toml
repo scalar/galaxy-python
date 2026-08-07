@@ -27,3 +27,6 @@ packages = ["src"]
 
 [tool.hatch.build.targets.wheel.sources]
 "src" = "scalar_galaxy"
+
+[tool.ruff]
+line-length = 120

@@ -10,8 +10,8 @@ from .planet import Planet
 
 __all__ = ["CelestialBody", "Satellite"]
 
-class Satellite(BaseModel):
 
+class Satellite(BaseModel):
     id: Optional[int] = None
 
     name: str
@@ -24,7 +24,6 @@ class Satellite(BaseModel):
     type: Optional[Literal["moon", "asteroid", "comet"]] = None
 
     orbit: Optional[object] = None
-
 
 
 CelestialBody: TypeAlias = Annotated[Union[Planet, Satellite], PropertyInfo(discriminator="type")]

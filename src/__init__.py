@@ -5,7 +5,18 @@ import typing as _t
 from . import types
 from ._types import NOT_GIVEN, Omit, NoneType, NotGiven, Transport, ProxiesTypes, omit, not_given
 from ._utils import file_from_path
-from ._client import Client, Stream, Galaxy, Timeout, Transport, AsyncClient, AsyncStream, AsyncGalaxy, RequestOptions, ENVIRONMENTS
+from ._client import (
+    Client,
+    Stream,
+    Galaxy,
+    Timeout,
+    Transport,
+    AsyncClient,
+    AsyncStream,
+    AsyncGalaxy,
+    RequestOptions,
+    ENVIRONMENTS,
+)
 from ._models import BaseModel
 from ._version import __title__, __version__
 from ._response import APIResponse as APIResponse, AsyncAPIResponse as AsyncAPIResponse

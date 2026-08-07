@@ -28,7 +28,6 @@ __all__ = ["CelestialBodiesResource", "AsyncCelestialBodiesResource"]
 
 
 class CelestialBodiesResource(SyncAPIResource):
-
     @cached_property
     def with_raw_response(self) -> CelestialBodiesResourceWithRawResponse:
         return CelestialBodiesResourceWithRawResponse(self)
@@ -60,8 +59,7 @@ class CelestialBodiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CelestialBodyCreateResponse:
-        ...
+    ) -> CelestialBodyCreateResponse: ...
 
     @overload
     def create(
@@ -78,15 +76,18 @@ class CelestialBodiesResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CelestialBodyCreateResponse:
-        ...
+    ) -> CelestialBodyCreateResponse: ...
 
     def create(
         self,
         *,
         name: str,
         description: Optional[str] | Omit = omit,
-        type: Union[Literal["terrestrial", "gas_giant", "ice_giant", "dwarf", "super_earth"], Literal["moon", "asteroid", "comet"]] | Omit = omit,
+        type: Union[
+            Literal["terrestrial", "gas_giant", "ice_giant", "dwarf", "super_earth"],
+            Literal["moon", "asteroid", "comet"],
+        ]
+        | Omit = omit,
         habitability_index: float | Omit = omit,
         physical_properties: celestial_body_create_params.PlanetPhysicalProperties | Omit = omit,
         atmosphere: Iterable[celestial_body_create_params.PlanetAtmosphere] | Omit = omit,
@@ -108,7 +109,7 @@ class CelestialBodiesResource(SyncAPIResource):
     ) -> CelestialBodyCreateResponse:
         """
         Stars, moons, comets, the occasional rogue asteroid — if it glows or drifts through the void, you can add it here.
-        
+
         Args:
             name: Body parameter.
             description: Body parameter.
@@ -129,10 +130,10 @@ class CelestialBodiesResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             CelestialBodyCreateResponse: Celestial body created
-        
+
         Example:
             ```python
             celestial_body = client.celestial_bodies.create(
@@ -143,32 +144,33 @@ class CelestialBodiesResource(SyncAPIResource):
         return self._post(
             "/celestial-bodies",
             body=maybe_transform(
-            {
-            "name": name,
-            "description": description,
-            "type": type,
-            "habitability_index": habitability_index,
-            "physical_properties": physical_properties,
-            "atmosphere": atmosphere,
-            "discovered_at": discovered_at,
-            "image": image,
-            "satellites": satellites,
-            "creator": creator,
-            "tags": tags,
-            "success_callback_url": success_callback_url,
-            "failure_callback_url": failure_callback_url,
-            "diameter": diameter,
-            "orbit": orbit,
-        },
-            celestial_body_create_params.CelestialBodyCreateParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "name": name,
+                    "description": description,
+                    "type": type,
+                    "habitability_index": habitability_index,
+                    "physical_properties": physical_properties,
+                    "atmosphere": atmosphere,
+                    "discovered_at": discovered_at,
+                    "image": image,
+                    "satellites": satellites,
+                    "creator": creator,
+                    "tags": tags,
+                    "success_callback_url": success_callback_url,
+                    "failure_callback_url": failure_callback_url,
+                    "diameter": diameter,
+                    "orbit": orbit,
+                },
+                celestial_body_create_params.CelestialBodyCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=CelestialBodyCreateResponse,
         )
 
 
 class AsyncCelestialBodiesResource(AsyncAPIResource):
-
     @cached_property
     def with_raw_response(self) -> AsyncCelestialBodiesResourceWithRawResponse:
         return AsyncCelestialBodiesResourceWithRawResponse(self)
@@ -200,8 +202,7 @@ class AsyncCelestialBodiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CelestialBodyCreateResponse:
-        ...
+    ) -> CelestialBodyCreateResponse: ...
 
     @overload
     async def create(
@@ -218,15 +219,18 @@ class AsyncCelestialBodiesResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> CelestialBodyCreateResponse:
-        ...
+    ) -> CelestialBodyCreateResponse: ...
 
     async def create(
         self,
         *,
         name: str,
         description: Optional[str] | Omit = omit,
-        type: Union[Literal["terrestrial", "gas_giant", "ice_giant", "dwarf", "super_earth"], Literal["moon", "asteroid", "comet"]] | Omit = omit,
+        type: Union[
+            Literal["terrestrial", "gas_giant", "ice_giant", "dwarf", "super_earth"],
+            Literal["moon", "asteroid", "comet"],
+        ]
+        | Omit = omit,
         habitability_index: float | Omit = omit,
         physical_properties: celestial_body_create_params.PlanetPhysicalProperties | Omit = omit,
         atmosphere: Iterable[celestial_body_create_params.PlanetAtmosphere] | Omit = omit,
@@ -248,7 +252,7 @@ class AsyncCelestialBodiesResource(AsyncAPIResource):
     ) -> CelestialBodyCreateResponse:
         """
         Stars, moons, comets, the occasional rogue asteroid — if it glows or drifts through the void, you can add it here.
-        
+
         Args:
             name: Body parameter.
             description: Body parameter.
@@ -269,10 +273,10 @@ class AsyncCelestialBodiesResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             CelestialBodyCreateResponse: Celestial body created
-        
+
         Example:
             ```python
             celestial_body = await client.celestial_bodies.create(
@@ -283,26 +287,28 @@ class AsyncCelestialBodiesResource(AsyncAPIResource):
         return await self._post(
             "/celestial-bodies",
             body=await async_maybe_transform(
-            {
-            "name": name,
-            "description": description,
-            "type": type,
-            "habitability_index": habitability_index,
-            "physical_properties": physical_properties,
-            "atmosphere": atmosphere,
-            "discovered_at": discovered_at,
-            "image": image,
-            "satellites": satellites,
-            "creator": creator,
-            "tags": tags,
-            "success_callback_url": success_callback_url,
-            "failure_callback_url": failure_callback_url,
-            "diameter": diameter,
-            "orbit": orbit,
-        },
-            celestial_body_create_params.CelestialBodyCreateParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "name": name,
+                    "description": description,
+                    "type": type,
+                    "habitability_index": habitability_index,
+                    "physical_properties": physical_properties,
+                    "atmosphere": atmosphere,
+                    "discovered_at": discovered_at,
+                    "image": image,
+                    "satellites": satellites,
+                    "creator": creator,
+                    "tags": tags,
+                    "success_callback_url": success_callback_url,
+                    "failure_callback_url": failure_callback_url,
+                    "diameter": diameter,
+                    "orbit": orbit,
+                },
+                celestial_body_create_params.CelestialBodyCreateParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=CelestialBodyCreateResponse,
         )
 

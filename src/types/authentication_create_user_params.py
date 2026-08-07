@@ -8,7 +8,6 @@ __all__ = ["AuthenticationCreateUserParams"]
 
 
 class AuthenticationCreateUserParams(TypedDict, total=False):
-
     name: str
 
     email: Required[str]

@@ -9,8 +9,8 @@ from .._models import BaseModel
 
 __all__ = ["PlanetUploadImageResponse"]
 
-class PlanetUploadImageResponse(BaseModel):
 
+class PlanetUploadImageResponse(BaseModel):
     message: Optional[str] = None
 
     image_url: Optional[str] = FieldInfo(alias="imageUrl", default=None)
@@ -24,6 +24,3 @@ class PlanetUploadImageResponse(BaseModel):
 
     mime_type: Optional[str] = FieldInfo(alias="mimeType", default=None)
     """The content type of the uploaded image"""
-
-
-
