@@ -8,7 +8,6 @@ __all__ = ["AuthenticationCreateTokenParams"]
 
 
 class AuthenticationCreateTokenParams(TypedDict, total=False):
-
     email: Required[str]
 
     password: Required[str]

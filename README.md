@@ -45,6 +45,7 @@ planet = client.planets.list_all_data(
     limit=10,
     offset=0,
 )
+
 print(planet)
 ```
 
@@ -63,12 +64,14 @@ import asyncio
 
 from scalar_galaxy import AsyncGalaxy
 
+
 async def main() -> None:
     client = AsyncGalaxy()
     planet = await client.planets.list_all_data(
         limit=10,
         offset=0,
     )
+
 
 asyncio.run(main())
 ```

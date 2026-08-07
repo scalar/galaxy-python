@@ -23,7 +23,6 @@ __all__ = ["AuthenticationResource", "AsyncAuthenticationResource"]
 
 
 class AuthenticationResource(SyncAPIResource):
-
     @cached_property
     def with_raw_response(self) -> AuthenticationResourceWithRawResponse:
         return AuthenticationResourceWithRawResponse(self)
@@ -47,7 +46,7 @@ class AuthenticationResource(SyncAPIResource):
     ) -> User:
         """
         Time to create a user account, eh?
-        
+
         Args:
             name: Body parameter.
             email: Body parameter.
@@ -56,10 +55,10 @@ class AuthenticationResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             User: User account created successfully
-        
+
         Example:
             ```python
             authentication = client.authentication.create_user(
@@ -72,14 +71,16 @@ class AuthenticationResource(SyncAPIResource):
         return self._post(
             "/user/signup",
             body=maybe_transform(
-            {
-            "name": name,
-            "email": email,
-            "password": password,
-        },
-            authentication_create_user_params.AuthenticationCreateUserParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "name": name,
+                    "email": email,
+                    "password": password,
+                },
+                authentication_create_user_params.AuthenticationCreateUserParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=User,
         )
 
@@ -97,7 +98,7 @@ class AuthenticationResource(SyncAPIResource):
     ) -> AuthenticationCreateTokenResponse:
         """
         Yeah, this is the boring security stuff. Just get your super secret token and move on.
-        
+
         Args:
             email: Body parameter.
             password: Body parameter.
@@ -105,10 +106,10 @@ class AuthenticationResource(SyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             AuthenticationCreateTokenResponse: Token Created
-        
+
         Example:
             ```python
             authentication = client.authentication.create_token(
@@ -120,13 +121,15 @@ class AuthenticationResource(SyncAPIResource):
         return self._post(
             "/auth/token",
             body=maybe_transform(
-            {
-            "email": email,
-            "password": password,
-        },
-            authentication_create_token_params.AuthenticationCreateTokenParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "email": email,
+                    "password": password,
+                },
+                authentication_create_token_params.AuthenticationCreateTokenParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=AuthenticationCreateTokenResponse,
         )
 
@@ -142,16 +145,16 @@ class AuthenticationResource(SyncAPIResource):
     ) -> User:
         """
         Find yourself they say. That's what you can do here.
-        
+
         Args:
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             User: Authenticated user information retrieved successfully
-        
+
         Example:
             ```python
             authentication = client.authentication.list_me()
@@ -159,13 +162,14 @@ class AuthenticationResource(SyncAPIResource):
         """
         return self._get(
             "/me",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=User,
         )
 
 
 class AsyncAuthenticationResource(AsyncAPIResource):
-
     @cached_property
     def with_raw_response(self) -> AsyncAuthenticationResourceWithRawResponse:
         return AsyncAuthenticationResourceWithRawResponse(self)
@@ -189,7 +193,7 @@ class AsyncAuthenticationResource(AsyncAPIResource):
     ) -> User:
         """
         Time to create a user account, eh?
-        
+
         Args:
             name: Body parameter.
             email: Body parameter.
@@ -198,10 +202,10 @@ class AsyncAuthenticationResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             User: User account created successfully
-        
+
         Example:
             ```python
             authentication = await client.authentication.create_user(
@@ -214,14 +218,16 @@ class AsyncAuthenticationResource(AsyncAPIResource):
         return await self._post(
             "/user/signup",
             body=await async_maybe_transform(
-            {
-            "name": name,
-            "email": email,
-            "password": password,
-        },
-            authentication_create_user_params.AuthenticationCreateUserParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "name": name,
+                    "email": email,
+                    "password": password,
+                },
+                authentication_create_user_params.AuthenticationCreateUserParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=User,
         )
 
@@ -239,7 +245,7 @@ class AsyncAuthenticationResource(AsyncAPIResource):
     ) -> AuthenticationCreateTokenResponse:
         """
         Yeah, this is the boring security stuff. Just get your super secret token and move on.
-        
+
         Args:
             email: Body parameter.
             password: Body parameter.
@@ -247,10 +253,10 @@ class AsyncAuthenticationResource(AsyncAPIResource):
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             AuthenticationCreateTokenResponse: Token Created
-        
+
         Example:
             ```python
             authentication = await client.authentication.create_token(
@@ -262,13 +268,15 @@ class AsyncAuthenticationResource(AsyncAPIResource):
         return await self._post(
             "/auth/token",
             body=await async_maybe_transform(
-            {
-            "email": email,
-            "password": password,
-        },
-            authentication_create_token_params.AuthenticationCreateTokenParams,
-        ),
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+                {
+                    "email": email,
+                    "password": password,
+                },
+                authentication_create_token_params.AuthenticationCreateTokenParams,
+            ),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=AuthenticationCreateTokenResponse,
         )
 
@@ -284,16 +292,16 @@ class AsyncAuthenticationResource(AsyncAPIResource):
     ) -> User:
         """
         Find yourself they say. That's what you can do here.
-        
+
         Args:
             extra_headers: Send extra headers with the request.
             extra_query: Send extra query parameters with the request.
             extra_body: Send extra JSON properties with the request.
             timeout: Override the client-level default timeout for this request, in seconds.
-        
+
         Returns:
             User: Authenticated user information retrieved successfully
-        
+
         Example:
             ```python
             authentication = await client.authentication.list_me()
@@ -301,7 +309,9 @@ class AsyncAuthenticationResource(AsyncAPIResource):
         """
         return await self._get(
             "/me",
-            options=make_request_options(extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout),
+            options=make_request_options(
+                extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
+            ),
             cast_to=User,
         )
 

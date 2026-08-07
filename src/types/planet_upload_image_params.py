@@ -9,6 +9,5 @@ __all__ = ["PlanetUploadImageParams"]
 
 
 class PlanetUploadImageParams(TypedDict, total=False):
-
     image: FileTypes
     """The image file to upload"""

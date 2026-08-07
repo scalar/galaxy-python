@@ -8,5 +8,4 @@ __all__ = ["UserParam"]
 
 
 class UserParam(TypedDict, total=False):
-
     name: str

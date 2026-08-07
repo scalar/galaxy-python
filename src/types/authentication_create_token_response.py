@@ -8,5 +8,4 @@ __all__ = ["AuthenticationCreateTokenResponse"]
 
 
 class AuthenticationCreateTokenResponse(BaseModel):
-
     token: Optional[str] = None

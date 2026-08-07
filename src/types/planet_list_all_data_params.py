@@ -8,7 +8,6 @@ __all__ = ["PlanetListAllDataParams"]
 
 
 class PlanetListAllDataParams(TypedDict, total=False):
-
     limit: int
     """The number of items to return"""
 

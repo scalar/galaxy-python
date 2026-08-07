@@ -8,7 +8,6 @@ __all__ = ["PlanetListAllDataResponse", "Meta"]
 
 
 class Meta(BaseModel):
-
     limit: Optional[int] = None
 
     offset: Optional[int] = None
@@ -18,9 +17,7 @@ class Meta(BaseModel):
     next: Optional[str] = None
 
 
-
 class PlanetListAllDataResponse(BaseModel):
-
     data: Optional[List[object]] = None
 
     meta: Optional[Meta] = None
