@@ -74,6 +74,8 @@ class Galaxy(SyncAPIClient):
     open_id_connect: str | None
     webhook_secret: str | None
 
+    _environment: Literal["production", "responds_with_your_request_data"] | NotGiven
+
     def __init__(
         self,
         *,
@@ -356,7 +358,7 @@ class Galaxy(SyncAPIClient):
         if cookies.get("api_key") is not None:
             return
         raise TypeError(
-            "Could not resolve authentication method. Expected Authorization or X-API-Key or query api_key or cookie api_key to be set."
+            '"Could not resolve authentication method. Expected either bearer_auth, both basic_auth_username and basic_auth_password, o_auth2, open_id_connect, api_key_header, api_key_query or api_key_cookie to be set. Or for one of the `Authorization` or `X-API-Key` headers to be explicitly omitted"'
         )
 
     def copy(
@@ -371,7 +373,7 @@ class Galaxy(SyncAPIClient):
         o_auth2: str | None = None,
         open_id_connect: str | None = None,
         webhook_secret: str | None = None,
-        environment: str | None = None,
+        environment: Literal["production", "responds_with_your_request_data"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -398,7 +400,7 @@ class Galaxy(SyncAPIClient):
         elif set_default_query is not None:
             params = set_default_query
         http_client = http_client or self._client
-        copied_base_url = base_url if base_url is not None else self.base_url
+        copied_base_url: str | httpx.URL | None = base_url if base_url is not None else self.base_url
         # Environment overrides must resolve their own URL instead of reusing this client's host.
         if environment is not None and base_url is None:
             copied_base_url = None
@@ -457,6 +459,8 @@ class AsyncGalaxy(AsyncAPIClient):
     o_auth2: str | None
     open_id_connect: str | None
     webhook_secret: str | None
+
+    _environment: Literal["production", "responds_with_your_request_data"] | NotGiven
 
     def __init__(
         self,
@@ -740,7 +744,7 @@ class AsyncGalaxy(AsyncAPIClient):
         if cookies.get("api_key") is not None:
             return
         raise TypeError(
-            "Could not resolve authentication method. Expected Authorization or X-API-Key or query api_key or cookie api_key to be set."
+            '"Could not resolve authentication method. Expected either bearer_auth, both basic_auth_username and basic_auth_password, o_auth2, open_id_connect, api_key_header, api_key_query or api_key_cookie to be set. Or for one of the `Authorization` or `X-API-Key` headers to be explicitly omitted"'
         )
 
     def copy(
@@ -755,7 +759,7 @@ class AsyncGalaxy(AsyncAPIClient):
         o_auth2: str | None = None,
         open_id_connect: str | None = None,
         webhook_secret: str | None = None,
-        environment: str | None = None,
+        environment: Literal["production", "responds_with_your_request_data"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
@@ -782,7 +786,7 @@ class AsyncGalaxy(AsyncAPIClient):
         elif set_default_query is not None:
             params = set_default_query
         http_client = http_client or self._client
-        copied_base_url = base_url if base_url is not None else self.base_url
+        copied_base_url: str | httpx.URL | None = base_url if base_url is not None else self.base_url
         # Environment overrides must resolve their own URL instead of reusing this client's host.
         if environment is not None and base_url is None:
             copied_base_url = None
