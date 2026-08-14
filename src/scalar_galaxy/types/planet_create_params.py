@@ -11,10 +11,10 @@ from .._utils import PropertyInfo
 
 from .user_param import UserParam
 
-__all__ = ["PlanetUpdateParams", "PhysicalProperties", "PhysicalPropertiesTemperature", "Atmosphere", "Satellite"]
+__all__ = ["PlanetCreateParams", "PhysicalProperties", "PhysicalPropertiesTemperature", "Atmosphere", "Satellite"]
 
 
-class PlanetUpdateParams(TypedDict, total=False):
+class PlanetCreateParams(TypedDict, total=False):
     name: Required[str]
 
     description: Optional[str]
@@ -48,6 +48,8 @@ class PlanetUpdateParams(TypedDict, total=False):
 
 
 class Satellite(TypedDict, total=False):
+    """Every satellite in the Scalar Galaxy"""
+
     name: Required[str]
 
     description: Optional[str]

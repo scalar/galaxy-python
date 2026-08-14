@@ -38,8 +38,8 @@ It's easy to say you know them all, but do you really? Retrieve all the planets 
 
 | Direction | Type |
 | --- | --- |
-| Request | [`PlanetListAllDataParams`](./src/types/planet_list_all_data_params.py) |
-| Response | [`PlanetListAllDataResponse`](./src/types/planet_list_all_data_response.py) |
+| Request | [`PlanetListAllDataParams`](./src/scalar_galaxy/types/planet_list_all_data_params.py) |
+| Response | [`PlanetListAllDataResponse`](./src/scalar_galaxy/types/planet_list_all_data_response.py) |
 
 ```python
 planet = client.planets.list_all_data(
@@ -54,8 +54,8 @@ Time to play god and create a new planet. What do you think? Ah, don't think too
 
 | Direction | Type |
 | --- | --- |
-| Request | [`PlanetCreateParams`](./src/types/planet_create_params.py) |
-| Response | [`Planet`](./src/types/planet.py) |
+| Request | [`PlanetCreateParams`](./src/scalar_galaxy/types/planet_create_params.py) |
+| Response | [`Planet`](./src/scalar_galaxy/types/planet.py) |
 
 ```python
 planet = client.planets.create(
@@ -69,7 +69,7 @@ You'll better learn a little bit more about the planets. It might come in handy 
 
 | Direction | Type |
 | --- | --- |
-| Response | [`Planet`](./src/types/planet.py) |
+| Response | [`Planet`](./src/scalar_galaxy/types/planet.py) |
 
 ```python
 planet = client.planets.retrieve(
@@ -83,8 +83,8 @@ Sometimes you make mistakes, that's fine. No worries, you can update all planets
 
 | Direction | Type |
 | --- | --- |
-| Request | [`PlanetUpdateParams`](./src/types/planet_update_params.py) |
-| Response | [`Planet`](./src/types/planet.py) |
+| Request | [`PlanetUpdateParams`](./src/scalar_galaxy/types/planet_update_params.py) |
+| Response | [`Planet`](./src/scalar_galaxy/types/planet.py) |
 
 ```python
 planet = client.planets.update(
@@ -109,8 +109,8 @@ Got a crazy good photo of a planet? Share it with the world!
 
 | Direction | Type |
 | --- | --- |
-| Request | [`PlanetUploadImageParams`](./src/types/planet_upload_image_params.py) |
-| Response | [`PlanetUploadImageResponse`](./src/types/planet_upload_image_response.py) |
+| Request | [`PlanetUploadImageParams`](./src/scalar_galaxy/types/planet_upload_image_params.py) |
+| Response | [`PlanetUploadImageResponse`](./src/scalar_galaxy/types/planet_upload_image_response.py) |
 
 ```python
 planet = client.planets.upload_image(
@@ -126,8 +126,8 @@ Stars, moons, comets, the occasional rogue asteroid — if it glows or drifts th
 
 | Direction | Type |
 | --- | --- |
-| Request | [`CelestialBodyCreateParams`](./src/types/celestial_body_create_params.py) |
-| Response | [`CelestialBodyCreateResponse`](./src/types/celestial_body_create_response.py) |
+| Request | [`CelestialBodyCreateParams`](./src/scalar_galaxy/types/celestial_body_create_params.py) |
+| Response | [`CelestialBodyCreateResponse`](./src/scalar_galaxy/types/celestial_body_create_response.py) |
 
 ```python
 celestial_body = client.celestial_bodies.create(
@@ -143,8 +143,8 @@ Time to create a user account, eh?
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AuthenticationCreateUserParams`](./src/types/authentication_create_user_params.py) |
-| Response | [`User`](./src/types/user.py) |
+| Request | [`AuthenticationCreateUserParams`](./src/scalar_galaxy/types/authentication_create_user_params.py) |
+| Response | [`User`](./src/scalar_galaxy/types/user.py) |
 
 ```python
 authentication = client.authentication.create_user(
@@ -160,8 +160,8 @@ Yeah, this is the boring security stuff. Just get your super secret token and mo
 
 | Direction | Type |
 | --- | --- |
-| Request | [`AuthenticationCreateTokenParams`](./src/types/authentication_create_token_params.py) |
-| Response | [`AuthenticationCreateTokenResponse`](./src/types/authentication_create_token_response.py) |
+| Request | [`AuthenticationCreateTokenParams`](./src/scalar_galaxy/types/authentication_create_token_params.py) |
+| Response | [`AuthenticationCreateTokenResponse`](./src/scalar_galaxy/types/authentication_create_token_response.py) |
 
 ```python
 authentication = client.authentication.create_token(
@@ -176,7 +176,7 @@ Find yourself they say. That's what you can do here.
 
 | Direction | Type |
 | --- | --- |
-| Response | [`User`](./src/types/user.py) |
+| Response | [`User`](./src/scalar_galaxy/types/user.py) |
 
 ```python
 authentication = client.authentication.list_me()
