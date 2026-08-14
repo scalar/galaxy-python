@@ -36,6 +36,8 @@ class SatelliteOrbit(TypedDict, total=False):
 
 
 class Satellite(TypedDict, total=False):
+    """Every satellite in the Scalar Galaxy"""
+
     name: Required[str]
 
     description: Optional[str]
@@ -49,6 +51,8 @@ class Satellite(TypedDict, total=False):
 
 
 class PlanetSatellite(TypedDict, total=False):
+    """Every satellite in the Scalar Galaxy"""
+
     name: Required[str]
 
     description: Optional[str]
@@ -92,6 +96,8 @@ class PlanetPhysicalProperties(TypedDict, total=False):
 
 
 class Planet(TypedDict, total=False):
+    """A planet in the Scalar Galaxy"""
+
     name: Required[str]
 
     description: Optional[str]

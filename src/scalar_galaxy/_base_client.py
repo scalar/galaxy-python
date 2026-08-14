@@ -18,6 +18,7 @@ from typing import (
     TYPE_CHECKING,
     Any,
     Dict,
+    List,
     Type,
     Union,
     Generic,
@@ -494,7 +495,11 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
         self,
         security: SecurityOptions,  # noqa: ARG002
     ) -> httpx.Auth | None:
-        return None
+        # Single hook for custom httpx auth on both the sync and async request paths. It defaults to
+        # the legacy public `custom_auth` property so subclasses that already override that property
+        # keep applying identically on both paths; override `_custom_auth` itself to layer
+        # per-operation, security-aware auth on top.
+        return self.custom_auth
 
     def _build_headers(
         self,
@@ -505,7 +510,7 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
         retries_taken: int = 0,
     ) -> httpx.Headers:
         custom_headers = options.headers or {}
-        # Auth headers are folded into `default_headers` (matching Stainless), so
+        # Auth headers are folded into `default_headers` (matching the reference SDKs), so
         # merging `default_headers` here already applies the configured credentials.
         headers_dict = _merge_mappings(self.default_headers, custom_headers)
         self._validate_headers(headers_dict, custom_headers, params, cookies)
@@ -1668,8 +1673,9 @@ class AsyncAPIClient(BaseClient[httpx.AsyncClient, AsyncStream[Any]]):
             await self._prepare_request(request)
 
             kwargs: HttpxSendArgs = {}
-            if self.custom_auth is not None:
-                kwargs["auth"] = self.custom_auth
+            custom_auth = self._custom_auth(options.security)
+            if custom_auth is not None:
+                kwargs["auth"] = custom_auth
 
             if options.follow_redirects is not None:
                 kwargs["follow_redirects"] = options.follow_redirects
