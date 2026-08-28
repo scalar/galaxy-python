@@ -46,7 +46,7 @@ _RESOURCE_IMPORT_LOCK = threading.RLock()
 
 ENVIRONMENTS: dict[str, str] = {
     "production": "https://galaxy.scalar.com",
-    "responds_with_your_request_data": "{protocol}://void.scalar.com/{path}",
+    "void": "https://void.scalar.com/",
 }
 
 __all__ = [
@@ -74,7 +74,7 @@ class Galaxy(SyncAPIClient):
     open_id_connect: str | None
     webhook_secret: str | None
 
-    _environment: Literal["production", "responds_with_your_request_data"] | NotGiven
+    _environment: Literal["production", "void"] | NotGiven
 
     def __init__(
         self,
@@ -88,7 +88,7 @@ class Galaxy(SyncAPIClient):
         o_auth2: str | None = None,
         open_id_connect: str | None = None,
         webhook_secret: str | None = None,
-        environment: Literal["production", "responds_with_your_request_data"] | NotGiven = not_given,
+        environment: Literal["production", "void"] | NotGiven = not_given,
         base_url: str | httpx.URL | None | NotGiven = not_given,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -373,7 +373,7 @@ class Galaxy(SyncAPIClient):
         o_auth2: str | None = None,
         open_id_connect: str | None = None,
         webhook_secret: str | None = None,
-        environment: Literal["production", "responds_with_your_request_data"] | None = None,
+        environment: Literal["production", "void"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
@@ -460,7 +460,7 @@ class AsyncGalaxy(AsyncAPIClient):
     open_id_connect: str | None
     webhook_secret: str | None
 
-    _environment: Literal["production", "responds_with_your_request_data"] | NotGiven
+    _environment: Literal["production", "void"] | NotGiven
 
     def __init__(
         self,
@@ -474,7 +474,7 @@ class AsyncGalaxy(AsyncAPIClient):
         o_auth2: str | None = None,
         open_id_connect: str | None = None,
         webhook_secret: str | None = None,
-        environment: Literal["production", "responds_with_your_request_data"] | NotGiven = not_given,
+        environment: Literal["production", "void"] | NotGiven = not_given,
         base_url: str | httpx.URL | None | NotGiven = not_given,
         timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
@@ -759,7 +759,7 @@ class AsyncGalaxy(AsyncAPIClient):
         o_auth2: str | None = None,
         open_id_connect: str | None = None,
         webhook_secret: str | None = None,
-        environment: Literal["production", "responds_with_your_request_data"] | None = None,
+        environment: Literal["production", "void"] | None = None,
         base_url: str | httpx.URL | None = None,
         timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
