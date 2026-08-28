@@ -22,10 +22,10 @@ from .._response import (
 )
 from .._base_client import make_request_options
 from ..types.planet_list_all_data_response import PlanetListAllDataResponse
-from ..types import planet_list_all_data_params, planet_create_params, planet_update_params, planet_upload_image_params
+from ..types import planet_list_all_data_params, planet_create_params, planet_update_params, planet_delte_image_params
 from ..types.planet import Planet
 from ..types.user_param import UserParam
-from ..types.planet_upload_image_response import PlanetUploadImageResponse
+from ..types.planet_delte_image_response import PlanetDelteImageResponse
 
 __all__ = ["PlanetsResource", "AsyncPlanetsResource"]
 
@@ -337,7 +337,7 @@ class PlanetsResource(SyncAPIResource):
             cast_to=NoneType,
         )
 
-    def upload_image(
+    def delte_image(
         self,
         planet_id: int,
         *,
@@ -348,7 +348,7 @@ class PlanetsResource(SyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PlanetUploadImageResponse:
+    ) -> PlanetDelteImageResponse:
         """
         Got a crazy good photo of a planet? Share it with the world!
 
@@ -361,11 +361,11 @@ class PlanetsResource(SyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            PlanetUploadImageResponse: Image uploaded
+            PlanetDelteImageResponse: Image uploaded
 
         Example:
             ```python
-            planet = client.planets.upload_image(
+            planet = client.planets.delte_image(
                 planet_id=1,
             )
             ```
@@ -382,12 +382,12 @@ class PlanetsResource(SyncAPIResource):
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return self._post(
             path_template("/planets/{planetId}/image", **{"planetId": planet_id}),
-            body=maybe_transform(body, planet_upload_image_params.PlanetUploadImageParams),
+            body=maybe_transform(body, planet_delte_image_params.PlanetDelteImageParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PlanetUploadImageResponse,
+            cast_to=PlanetDelteImageResponse,
         )
 
 
@@ -698,7 +698,7 @@ class AsyncPlanetsResource(AsyncAPIResource):
             cast_to=NoneType,
         )
 
-    async def upload_image(
+    async def delte_image(
         self,
         planet_id: int,
         *,
@@ -709,7 +709,7 @@ class AsyncPlanetsResource(AsyncAPIResource):
         extra_query: Query | None = None,
         extra_body: Body | None = None,
         timeout: float | httpx.Timeout | None | NotGiven = not_given,
-    ) -> PlanetUploadImageResponse:
+    ) -> PlanetDelteImageResponse:
         """
         Got a crazy good photo of a planet? Share it with the world!
 
@@ -722,11 +722,11 @@ class AsyncPlanetsResource(AsyncAPIResource):
             timeout: Override the client-level default timeout for this request, in seconds.
 
         Returns:
-            PlanetUploadImageResponse: Image uploaded
+            PlanetDelteImageResponse: Image uploaded
 
         Example:
             ```python
-            planet = await client.planets.upload_image(
+            planet = await client.planets.delte_image(
                 planet_id=1,
             )
             ```
@@ -743,12 +743,12 @@ class AsyncPlanetsResource(AsyncAPIResource):
         extra_headers = {"Content-Type": "multipart/form-data", **(extra_headers or {})}
         return await self._post(
             path_template("/planets/{planetId}/image", **{"planetId": planet_id}),
-            body=await async_maybe_transform(body, planet_upload_image_params.PlanetUploadImageParams),
+            body=await async_maybe_transform(body, planet_delte_image_params.PlanetDelteImageParams),
             files=files,
             options=make_request_options(
                 extra_headers=extra_headers, extra_query=extra_query, extra_body=extra_body, timeout=timeout
             ),
-            cast_to=PlanetUploadImageResponse,
+            cast_to=PlanetDelteImageResponse,
         )
 
 
@@ -771,8 +771,8 @@ class PlanetsResourceWithRawResponse:
         self.delete = to_raw_response_wrapper(
             planets.delete,
         )
-        self.upload_image = to_raw_response_wrapper(
-            planets.upload_image,
+        self.delte_image = to_raw_response_wrapper(
+            planets.delte_image,
         )
 
 
@@ -795,8 +795,8 @@ class AsyncPlanetsResourceWithRawResponse:
         self.delete = async_to_raw_response_wrapper(
             planets.delete,
         )
-        self.upload_image = async_to_raw_response_wrapper(
-            planets.upload_image,
+        self.delte_image = async_to_raw_response_wrapper(
+            planets.delte_image,
         )
 
 
@@ -819,8 +819,8 @@ class PlanetsResourceWithStreamingResponse:
         self.delete = to_streamed_response_wrapper(
             planets.delete,
         )
-        self.upload_image = to_streamed_response_wrapper(
-            planets.upload_image,
+        self.delte_image = to_streamed_response_wrapper(
+            planets.delte_image,
         )
 
 
@@ -843,6 +843,6 @@ class AsyncPlanetsResourceWithStreamingResponse:
         self.delete = async_to_streamed_response_wrapper(
             planets.delete,
         )
-        self.upload_image = async_to_streamed_response_wrapper(
-            planets.upload_image,
+        self.delte_image = async_to_streamed_response_wrapper(
+            planets.delte_image,
         )
