@@ -25,16 +25,24 @@ class SmokeResult(TypedDict, total=False):
     operation: str
     method: str
     path: str
+    label: str
     status: str
     durationMs: int
     error: str
 
 
-class SmokeCase(TypedDict):
+class _SmokeCaseBase(TypedDict):
     operation: str
     method: str
     path: str
     run: Callable[[], Any]
+
+
+# `label` says which of an operation's two calls this is — "required params" or "all params".
+# It sits in a total=False extension because it is absent when the operation contributed a
+# single case, while the fields above are always present.
+class SmokeCase(_SmokeCaseBase, total=False):
+    label: str
 
 
 def _smoke_case_0() -> None:
@@ -51,37 +59,99 @@ def _smoke_case_1() -> None:
 
 
 def _smoke_case_2() -> None:
+    planet = client.planets.create(
+        name="Mars",
+        description="The red planet",
+        type="terrestrial",
+        habitability_index=0.68,
+        physical_properties={"mass": 0.107, "radius": 0.532, "gravity": 0.378, "temperature": {}},
+        atmosphere=[],
+        discovered_at="1610-01-07T00:00:00Z",
+        image="https://cdn.scalar.com/photos/mars.jpg",
+        satellites=[],
+        creator={"name": "Marc"},
+        tags=[],
+        success_callback_url="https://example.com/webhook",
+        failure_callback_url="https://example.com/webhook",
+    )
+
+
+def _smoke_case_3() -> None:
     planet = client.planets.retrieve(
         planet_id=1,
     )
 
 
-def _smoke_case_3() -> None:
+def _smoke_case_4() -> None:
     planet = client.planets.update(
         planet_id=1,
         name="Mars",
     )
 
 
-def _smoke_case_4() -> None:
+def _smoke_case_5() -> None:
+    planet = client.planets.update(
+        planet_id=1,
+        name="Mars",
+        description="The red planet",
+        type="terrestrial",
+        habitability_index=0.68,
+        physical_properties={"mass": 0.107, "radius": 0.532, "gravity": 0.378, "temperature": {}},
+        atmosphere=[],
+        discovered_at="1610-01-07T00:00:00Z",
+        image="https://cdn.scalar.com/photos/mars.jpg",
+        satellites=[],
+        creator={"name": "Marc"},
+        tags=[],
+        success_callback_url="https://example.com/webhook",
+        failure_callback_url="https://example.com/webhook",
+    )
+
+
+def _smoke_case_6() -> None:
     client.planets.delete(
         planet_id=1,
     )
 
 
-def _smoke_case_5() -> None:
-    planet = client.planets.upload_image(
+def _smoke_case_7() -> None:
+    planet = client.planets.delte_image(
         planet_id=1,
     )
 
 
-def _smoke_case_6() -> None:
+def _smoke_case_8() -> None:
+    planet = client.planets.delte_image(
+        planet_id=1,
+        image=b"@mars.jpg",
+    )
+
+
+def _smoke_case_9() -> None:
     celestial_body = client.celestial_bodies.create(
         name="Mars",
     )
 
 
-def _smoke_case_7() -> None:
+def _smoke_case_10() -> None:
+    celestial_body = client.celestial_bodies.create(
+        name="Mars",
+        description="The red planet",
+        type="terrestrial",
+        habitability_index=0.68,
+        physical_properties={"mass": 0.107, "radius": 0.532, "gravity": 0.378, "temperature": {}},
+        atmosphere=[],
+        discovered_at="1610-01-07T00:00:00Z",
+        image="https://cdn.scalar.com/photos/mars.jpg",
+        satellites=[],
+        creator={"name": "Marc"},
+        tags=[],
+        success_callback_url="https://example.com/webhook",
+        failure_callback_url="https://example.com/webhook",
+    )
+
+
+def _smoke_case_11() -> None:
     authentication = client.authentication.create_user(
         name="Marc",
         email="marc@scalar.com",
@@ -89,14 +159,14 @@ def _smoke_case_7() -> None:
     )
 
 
-def _smoke_case_8() -> None:
+def _smoke_case_12() -> None:
     authentication = client.authentication.create_token(
         email="marc@scalar.com",
         password="i-love-scalar",
     )
 
 
-def _smoke_case_9() -> None:
+def _smoke_case_13() -> None:
     authentication = client.authentication.list_me()
 
 
@@ -111,55 +181,87 @@ cases: list[SmokeCase] = [
         "operation": "create",
         "method": "POST",
         "path": "/planets",
+        "label": "required params",
         "run": _smoke_case_1,
+    },
+    {
+        "operation": "create",
+        "method": "POST",
+        "path": "/planets",
+        "label": "all params",
+        "run": _smoke_case_2,
     },
     {
         "operation": "retrieve",
         "method": "GET",
         "path": "/planets/{planetId}",
-        "run": _smoke_case_2,
+        "run": _smoke_case_3,
     },
     {
         "operation": "update",
         "method": "PUT",
         "path": "/planets/{planetId}",
-        "run": _smoke_case_3,
+        "label": "required params",
+        "run": _smoke_case_4,
+    },
+    {
+        "operation": "update",
+        "method": "PUT",
+        "path": "/planets/{planetId}",
+        "label": "all params",
+        "run": _smoke_case_5,
     },
     {
         "operation": "delete",
         "method": "DELETE",
         "path": "/planets/{planetId}",
-        "run": _smoke_case_4,
+        "run": _smoke_case_6,
     },
     {
-        "operation": "uploadImage",
+        "operation": "delteImage",
         "method": "POST",
         "path": "/planets/{planetId}/image",
-        "run": _smoke_case_5,
+        "label": "required params",
+        "run": _smoke_case_7,
+    },
+    {
+        "operation": "delteImage",
+        "method": "POST",
+        "path": "/planets/{planetId}/image",
+        "label": "all params",
+        "run": _smoke_case_8,
     },
     {
         "operation": "create",
         "method": "POST",
         "path": "/celestial-bodies",
-        "run": _smoke_case_6,
+        "label": "required params",
+        "run": _smoke_case_9,
+    },
+    {
+        "operation": "create",
+        "method": "POST",
+        "path": "/celestial-bodies",
+        "label": "all params",
+        "run": _smoke_case_10,
     },
     {
         "operation": "createUser",
         "method": "POST",
         "path": "/user/signup",
-        "run": _smoke_case_7,
+        "run": _smoke_case_11,
     },
     {
         "operation": "createToken",
         "method": "POST",
         "path": "/auth/token",
-        "run": _smoke_case_8,
+        "run": _smoke_case_12,
     },
     {
         "operation": "listMe",
         "method": "GET",
         "path": "/me",
-        "run": _smoke_case_9,
+        "run": _smoke_case_13,
     },
 ]
 
@@ -186,22 +288,33 @@ def _smoke_concurrency(case_count: int) -> int:
     return min(DEFAULT_SMOKE_CONCURRENCY, case_count)
 
 
+def _case_identity(case: SmokeCase) -> SmokeResult:
+    # `label` is carried through only when the operation contributed both of its calls, so a
+    # single-case operation reports exactly as it did before there were two.
+    identity: SmokeResult = {
+        "operation": case["operation"],
+        "method": case["method"],
+        "path": case["path"],
+    }
+    label = case.get("label")
+    if label:
+        identity["label"] = label
+    return identity
+
+
 def _run_case(case: SmokeCase) -> SmokeResult:
     started_at = time.monotonic()
+    identity = _case_identity(case)
     try:
         case["run"]()
         return {
-            "operation": case["operation"],
-            "method": case["method"],
-            "path": case["path"],
+            **identity,
             "status": "passed",
             "durationMs": int((time.monotonic() - started_at) * 1000),
         }
     except Exception:
         return {
-            "operation": case["operation"],
-            "method": case["method"],
-            "path": case["path"],
+            **identity,
             "status": "failed",
             "durationMs": int((time.monotonic() - started_at) * 1000),
             "error": traceback.format_exc(),
@@ -226,11 +339,14 @@ def main() -> None:
         )
     else:
         for result in results:
+            suffix = f" [{result['label']}]" if result.get("label") else ""
             if result["status"] == "passed":
-                print(f"PASS {result['operation']} ({result['method']} {result['path']}) {result['durationMs']}ms")
+                print(
+                    f"PASS {result['operation']}{suffix} ({result['method']} {result['path']}) {result['durationMs']}ms"
+                )
             else:
                 print(
-                    f"FAIL {result['operation']} ({result['method']} {result['path']})\n{result.get('error', '')}",
+                    f"FAIL {result['operation']}{suffix} ({result['method']} {result['path']})\n{result.get('error', '')}",
                     file=sys.stderr,
                 )
         if not results:
