@@ -5,9 +5,9 @@ from __future__ import annotations
 from typing_extensions import TypedDict
 from .._types import FileTypes
 
-__all__ = ["PlanetUploadImageParams"]
+__all__ = ["PlanetDelteImageParams"]
 
 
-class PlanetUploadImageParams(TypedDict, total=False):
+class PlanetDelteImageParams(TypedDict, total=False):
     image: FileTypes
     """The image file to upload"""

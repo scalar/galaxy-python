@@ -111,11 +111,11 @@ Got a crazy good photo of a planet? Share it with the world!
 
 | Direction | Type |
 | --- | --- |
-| Request | [`PlanetUploadImageParams`](./src/scalar_galaxy/types/planet_upload_image_params.py) |
-| Response | [`PlanetUploadImageResponse`](./src/scalar_galaxy/types/planet_upload_image_response.py) |
+| Request | [`PlanetDelteImageParams`](./src/scalar_galaxy/types/planet_delte_image_params.py) |
+| Response | [`PlanetDelteImageResponse`](./src/scalar_galaxy/types/planet_delte_image_response.py) |
 
 ```python
-planet = client.planets.upload_image(
+planet = client.planets.delte_image(
     planet_id=1,
 )
 ```
