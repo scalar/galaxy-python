@@ -1,6 +1,6 @@
 [project]
 name = "scalar-galaxy"
-version = "0.3.0" # x-release-please-version
+version = "0.3.1" # x-release-please-version
 description = "The Scalar Galaxy is an example OpenAPI document to test OpenAPI tools and libraries. It's a fictional universe with fictional planets and fictional data."
 readme = "README.md"
 license = "Apache-2.0"
