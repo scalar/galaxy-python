@@ -1,5 +1,64 @@
 # Changelog
 
+## [0.3.1](https://github.com/scalar/galaxy-python/compare/v0.3.1...v0.3.1) (2026-09-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* 3 breaking changes to the SDK surface.
+    - Removed operation `planets.uploadImage` (`POST /planets/{planetId}/image`).
+    - Removed schema `UploadImageResponseHeaders`.
+    - Removed schema `UploadImageStatus400ResponseHeaders`.
+* **api:** 3 breaking changes to the SDK surface.
+    - Property `planet.habitabilityIndex` type changed from `number<float>` to `number<float>`.
+    - Property `planet.physicalProperties` type changed from `object` to `object`.
+    - Property `planet.atmosphere` type changed from `Array<object>` to `Array<object>`.
+* **api:** Removed environment `responds_with_your_request_data`.
+* **api:** 3 breaking changes to the SDK surface.
+    - Removed operation `planets.uploadImage` (`POST /planets/{planetId}/image`).
+    - Removed schema `UploadImageResponseHeaders`.
+    - Removed schema `UploadImageStatus400ResponseHeaders`.
+* **api:** Removed environment `responds_with_your_request_data`.
+* **api:** 3 breaking changes to the SDK surface.
+    - Removed operation `planets.uploadImage` (`POST /planets/{planetId}/image`).
+    - Removed schema `UploadImageResponseHeaders`.
+    - Removed schema `UploadImageStatus400ResponseHeaders`.
+
+### release
+
+* 0.3.1 ([#4](https://github.com/scalar/galaxy-python/issues/4)) ([c36b3ff](https://github.com/scalar/galaxy-python/commit/c36b3ff08b3c009ac63bfaf41c551850fef62d62))
+
+
+### Features
+
+* **api:** initial SDK generation ([58d8cfb](https://github.com/scalar/galaxy-python/commit/58d8cfb76a33e179160d14b46607ebedea60f239))
+* **api:** remove operation planets.uploadImage (+6 more changes) ([dae5680](https://github.com/scalar/galaxy-python/commit/dae5680d63d4129fa9e629475dba6978c9c856c3))
+* **api:** remove operation planets.uploadImage (+6 more changes) ([988f4f1](https://github.com/scalar/galaxy-python/commit/988f4f1baddcf265f99ded5fb0ab0672acba74ce))
+* **api:** update property planet.habitabilityIndex (+3 more changes) ([d13d692](https://github.com/scalar/galaxy-python/commit/d13d6924e0ac598bf7b9ae53dfee2d3648d597c1))
+* **api:** update SDK surface (2 changes) ([fb5cbb6](https://github.com/scalar/galaxy-python/commit/fb5cbb63b9043d4b97e4328d6c97133f4765e18c))
+* **api:** update SDK surface (2 changes) ([ea460eb](https://github.com/scalar/galaxy-python/commit/ea460eb3b604fa91f07a13037c1c23dbd6e7ff46))
+
+
+### Chores
+
+* **api:** regenerate SDK ([c83f53e](https://github.com/scalar/galaxy-python/commit/c83f53eacd51c58ddd59f4ec94693f947b71694a))
+* **api:** regenerate SDK ([c9ecb15](https://github.com/scalar/galaxy-python/commit/c9ecb1505b78dae1c365af49b3471faad18e48b6))
+* **api:** regenerate SDK ([0a8a399](https://github.com/scalar/galaxy-python/commit/0a8a399204d2462043a33c640ecc2c4fe2e1304e))
+* **api:** regenerate SDK ([cc7c6d9](https://github.com/scalar/galaxy-python/commit/cc7c6d9457a38d3a307e51378de6b49b062e80d4))
+* **api:** regenerate SDK ([4d7e2c2](https://github.com/scalar/galaxy-python/commit/4d7e2c2270844a6501a0c356e81b636896faffd1))
+* **api:** regenerate SDK ([6d667ae](https://github.com/scalar/galaxy-python/commit/6d667aec39db196cc0568c94e14a048498c09a5e))
+* **api:** regenerate SDK ([6d8385a](https://github.com/scalar/galaxy-python/commit/6d8385a6460f127c363d3586233cf1c378537a27))
+* **api:** regenerate SDK ([a467cce](https://github.com/scalar/galaxy-python/commit/a467cce81af45aa31c3333e5b76d603cae853456))
+* **api:** regenerate SDK ([2674c94](https://github.com/scalar/galaxy-python/commit/2674c946e4ce298f49bfd090b137c73d5febbc61))
+* **api:** regenerate SDK ([76d535c](https://github.com/scalar/galaxy-python/commit/76d535c551d032bb9aba85a256256d1618d5a7e3))
+* **api:** update generated SDK content ([39f800d](https://github.com/scalar/galaxy-python/commit/39f800dceb4381e9ecadf9c4d3aa3269c77161bf))
+* **api:** update generated SDK content ([6ccc9b3](https://github.com/scalar/galaxy-python/commit/6ccc9b39d3e89824d31cf6ef7cf3a98b53c5b0aa))
+* **api:** update generated SDK content ([82b71a4](https://github.com/scalar/galaxy-python/commit/82b71a4001d4d3aee107eaf80886c49ee35a255f))
+* **api:** update generated SDK content ([bfc6022](https://github.com/scalar/galaxy-python/commit/bfc60224b758602477ba6bc702fc9db8657d9150))
+* **api:** update generated SDK content ([cb542d1](https://github.com/scalar/galaxy-python/commit/cb542d1c95b404ad928bba1deace7ec45defeb23))
+* release 0.3.1 ([dc89444](https://github.com/scalar/galaxy-python/commit/dc8944438ab9e6c25c3e8ae126ca1be3314285cb))
+* release 0.3.1 ([ecd956e](https://github.com/scalar/galaxy-python/commit/ecd956ebd75dfa41ba928d7064a41b946711248a))
+
 ## [0.3.1](https://github.com/scalar/galaxy-python/compare/v0.3.0...v0.3.1) (2026-09-15)
 
 
