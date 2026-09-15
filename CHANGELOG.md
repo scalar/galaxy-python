@@ -1,5 +1,28 @@
 # Changelog
 
+## [0.3.1](https://github.com/scalar/galaxy-python/compare/v0.3.0...v0.3.1) (2026-09-15)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 3 breaking changes to the SDK surface.
+    - Property `planet.habitabilityIndex` type changed from `number<float>` to `number<float>`.
+    - Property `planet.physicalProperties` type changed from `object` to `object`.
+    - Property `planet.atmosphere` type changed from `Array<object>` to `Array<object>`.
+
+### Features
+
+* **api:** update property planet.habitabilityIndex (+3 more changes) ([d13d692](https://github.com/scalar/galaxy-python/commit/d13d6924e0ac598bf7b9ae53dfee2d3648d597c1))
+
+
+### Chores
+
+* **api:** regenerate SDK ([c83f53e](https://github.com/scalar/galaxy-python/commit/c83f53eacd51c58ddd59f4ec94693f947b71694a))
+* **api:** regenerate SDK ([c9ecb15](https://github.com/scalar/galaxy-python/commit/c9ecb1505b78dae1c365af49b3471faad18e48b6))
+* **api:** update generated SDK content ([39f800d](https://github.com/scalar/galaxy-python/commit/39f800dceb4381e9ecadf9c4d3aa3269c77161bf))
+* release 0.3.1 ([dc89444](https://github.com/scalar/galaxy-python/commit/dc8944438ab9e6c25c3e8ae126ca1be3314285cb))
+* release 0.3.1 ([ecd956e](https://github.com/scalar/galaxy-python/commit/ecd956ebd75dfa41ba928d7064a41b946711248a))
+
 ## [0.3.0](https://github.com/scalar/galaxy-python/compare/v0.2.1...v0.3.0) (2026-08-28)
 
 
