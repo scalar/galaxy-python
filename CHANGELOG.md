@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.2](https://github.com/scalar/galaxy-python/compare/v0.3.1...v0.3.2) (2026-10-02)
+
+
+### Chores
+
+* **api:** regenerate SDK ([cf25ce3](https://github.com/scalar/galaxy-python/commit/cf25ce31d5f1e4243352fa3cc27037e1f367d609))
+* **api:** update generated SDK content ([1c1009d](https://github.com/scalar/galaxy-python/commit/1c1009dbce898cfbfda1a304f9096b2e1d6dd7f9))
+
 ## [0.3.1](https://github.com/scalar/galaxy-python/compare/v0.3.0...v0.3.1) (2026-09-15)
 
 
