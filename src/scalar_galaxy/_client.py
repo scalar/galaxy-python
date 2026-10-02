@@ -24,7 +24,7 @@ from ._types import (
 )
 from ._utils import is_given, is_mapping_t, get_async_library
 from ._compat import cached_property
-from ._exceptions import APIStatusError, GalaxyError
+from ._exceptions import APIStatusError
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
     SyncAPIClient,
@@ -64,12 +64,12 @@ __all__ = [
 
 class Galaxy(SyncAPIClient):
     # client options
-    bearer_auth: str
-    basic_auth_username: str
-    basic_auth_password: str
-    api_key_header: str
-    api_key_query: str
-    api_key_cookie: str
+    bearer_auth: str | None
+    basic_auth_username: str | None
+    basic_auth_password: str | None
+    api_key_header: str | None
+    api_key_query: str | None
+    api_key_cookie: str | None
     o_auth2: str | None
     open_id_connect: str | None
     webhook_secret: str | None
@@ -121,45 +121,21 @@ class Galaxy(SyncAPIClient):
         """
         if bearer_auth is None:
             bearer_auth = os.environ.get("BEARER_AUTH")
-        if bearer_auth is None:
-            raise GalaxyError(
-                "The bearer_auth client option must be set either by passing bearer_auth to the client or by setting the BEARER_AUTH environment variable"
-            )
         self.bearer_auth = bearer_auth
         if basic_auth_username is None:
             basic_auth_username = os.environ.get("BASIC_AUTH_USERNAME")
-        if basic_auth_username is None:
-            raise GalaxyError(
-                "The basic_auth_username client option must be set either by passing basic_auth_username to the client or by setting the BASIC_AUTH_USERNAME environment variable"
-            )
         self.basic_auth_username = basic_auth_username
         if basic_auth_password is None:
             basic_auth_password = os.environ.get("BASIC_AUTH_PASSWORD")
-        if basic_auth_password is None:
-            raise GalaxyError(
-                "The basic_auth_password client option must be set either by passing basic_auth_password to the client or by setting the BASIC_AUTH_PASSWORD environment variable"
-            )
         self.basic_auth_password = basic_auth_password
         if api_key_header is None:
             api_key_header = os.environ.get("API_KEY_HEADER")
-        if api_key_header is None:
-            raise GalaxyError(
-                "The api_key_header client option must be set either by passing api_key_header to the client or by setting the API_KEY_HEADER environment variable"
-            )
         self.api_key_header = api_key_header
         if api_key_query is None:
             api_key_query = os.environ.get("API_KEY_QUERY")
-        if api_key_query is None:
-            raise GalaxyError(
-                "The api_key_query client option must be set either by passing api_key_query to the client or by setting the API_KEY_QUERY environment variable"
-            )
         self.api_key_query = api_key_query
         if api_key_cookie is None:
             api_key_cookie = os.environ.get("API_KEY_COOKIE")
-        if api_key_cookie is None:
-            raise GalaxyError(
-                "The api_key_cookie client option must be set either by passing api_key_cookie to the client or by setting the API_KEY_COOKIE environment variable"
-            )
         self.api_key_cookie = api_key_cookie
         if o_auth2 is None:
             o_auth2 = os.environ.get("SCALAR_O_AUTH2")
@@ -450,12 +426,12 @@ class Galaxy(SyncAPIClient):
 
 class AsyncGalaxy(AsyncAPIClient):
     # client options
-    bearer_auth: str
-    basic_auth_username: str
-    basic_auth_password: str
-    api_key_header: str
-    api_key_query: str
-    api_key_cookie: str
+    bearer_auth: str | None
+    basic_auth_username: str | None
+    basic_auth_password: str | None
+    api_key_header: str | None
+    api_key_query: str | None
+    api_key_cookie: str | None
     o_auth2: str | None
     open_id_connect: str | None
     webhook_secret: str | None
@@ -507,45 +483,21 @@ class AsyncGalaxy(AsyncAPIClient):
         """
         if bearer_auth is None:
             bearer_auth = os.environ.get("BEARER_AUTH")
-        if bearer_auth is None:
-            raise GalaxyError(
-                "The bearer_auth client option must be set either by passing bearer_auth to the client or by setting the BEARER_AUTH environment variable"
-            )
         self.bearer_auth = bearer_auth
         if basic_auth_username is None:
             basic_auth_username = os.environ.get("BASIC_AUTH_USERNAME")
-        if basic_auth_username is None:
-            raise GalaxyError(
-                "The basic_auth_username client option must be set either by passing basic_auth_username to the client or by setting the BASIC_AUTH_USERNAME environment variable"
-            )
         self.basic_auth_username = basic_auth_username
         if basic_auth_password is None:
             basic_auth_password = os.environ.get("BASIC_AUTH_PASSWORD")
-        if basic_auth_password is None:
-            raise GalaxyError(
-                "The basic_auth_password client option must be set either by passing basic_auth_password to the client or by setting the BASIC_AUTH_PASSWORD environment variable"
-            )
         self.basic_auth_password = basic_auth_password
         if api_key_header is None:
             api_key_header = os.environ.get("API_KEY_HEADER")
-        if api_key_header is None:
-            raise GalaxyError(
-                "The api_key_header client option must be set either by passing api_key_header to the client or by setting the API_KEY_HEADER environment variable"
-            )
         self.api_key_header = api_key_header
         if api_key_query is None:
             api_key_query = os.environ.get("API_KEY_QUERY")
-        if api_key_query is None:
-            raise GalaxyError(
-                "The api_key_query client option must be set either by passing api_key_query to the client or by setting the API_KEY_QUERY environment variable"
-            )
         self.api_key_query = api_key_query
         if api_key_cookie is None:
             api_key_cookie = os.environ.get("API_KEY_COOKIE")
-        if api_key_cookie is None:
-            raise GalaxyError(
-                "The api_key_cookie client option must be set either by passing api_key_cookie to the client or by setting the API_KEY_COOKIE environment variable"
-            )
         self.api_key_cookie = api_key_cookie
         if o_auth2 is None:
             o_auth2 = os.environ.get("SCALAR_O_AUTH2")
