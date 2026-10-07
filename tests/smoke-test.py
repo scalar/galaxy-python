@@ -18,7 +18,7 @@ from scalar_galaxy import Galaxy
 
 # The shared smoke-test runner injects base URL and credentials through the same
 # environment variables the generated client reads in normal use.
-client = Galaxy(max_retries=0, timeout=30)
+client = Galaxy(max_retries=2, timeout=10)
 
 
 class SmokeResult(TypedDict, total=False):
