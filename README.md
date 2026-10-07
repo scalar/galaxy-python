@@ -84,13 +84,13 @@ Pass credentials to the generated client constructor. Environment variables are 
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `bearer_auth` | `string \| provider` | - | JWT Bearer token authentication Defaults to BEARER_AUTH. |
-| `basic_auth_username` | `string \| provider` | - | Basic HTTP authentication Defaults to BASIC_AUTH_USERNAME. |
-| `api_key_header` | `string \| provider` | - | API key request header Defaults to API_KEY_HEADER. |
-| `api_key_query` | `string \| provider` | - | API key query parameter Defaults to API_KEY_QUERY. |
-| `api_key_cookie` | `string \| provider` | - | API key browser cookie Defaults to API_KEY_COOKIE. |
-| `o_auth2` | `string \| provider` | - | OAuth 2.0 authentication Defaults to SCALAR_O_AUTH2. |
-| `open_id_connect` | `string \| provider` | - | OpenID Connect Authentication Defaults to SCALAR_OPEN_ID_CONNECT. |
+| `bearer_auth` | `str \| None` | - | JWT Bearer token authentication Defaults to BEARER_AUTH. |
+| `basic_auth_username` | `str \| None` | - | Basic HTTP authentication Defaults to BASIC_AUTH_USERNAME. |
+| `api_key_header` | `str \| None` | - | API key request header Defaults to API_KEY_HEADER. |
+| `api_key_query` | `str \| None` | - | API key query parameter Defaults to API_KEY_QUERY. |
+| `api_key_cookie` | `str \| None` | - | API key browser cookie Defaults to API_KEY_COOKIE. |
+| `o_auth2` | `str \| None` | - | OAuth 2.0 authentication Defaults to SCALAR_O_AUTH2. |
+| `open_id_connect` | `str \| None` | - | OpenID Connect Authentication Defaults to SCALAR_OPEN_ID_CONNECT. |
 
 Declared schemes:
 
@@ -177,6 +177,6 @@ Generated clients support request timeouts and retry temporary failures such as 
 
 ## Requirements
 
-- Python 3.8 or newer
+- Python 3.9 or newer
 
 Powered by Scalar.
