@@ -46,7 +46,7 @@ class SmokeCase(_SmokeCaseBase, total=False):
 
 
 def _smoke_case_0() -> None:
-    planet = client.planets.list_all_data(
+    planet = client.planets.list(
         limit=10,
         offset=0,
     )
@@ -115,13 +115,13 @@ def _smoke_case_6() -> None:
 
 
 def _smoke_case_7() -> None:
-    planet = client.planets.delte_image(
+    planet = client.planets.upload_image(
         planet_id=1,
     )
 
 
 def _smoke_case_8() -> None:
-    planet = client.planets.delte_image(
+    planet = client.planets.upload_image(
         planet_id=1,
         image=b"@mars.jpg",
     )
@@ -172,7 +172,7 @@ def _smoke_case_13() -> None:
 
 cases: list[SmokeCase] = [
     {
-        "operation": "listAllData",
+        "operation": "list",
         "method": "GET",
         "path": "/planets",
         "run": _smoke_case_0,
@@ -218,14 +218,14 @@ cases: list[SmokeCase] = [
         "run": _smoke_case_6,
     },
     {
-        "operation": "delteImage",
+        "operation": "uploadImage",
         "method": "POST",
         "path": "/planets/{planetId}/image",
         "label": "required params",
         "run": _smoke_case_7,
     },
     {
-        "operation": "delteImage",
+        "operation": "uploadImage",
         "method": "POST",
         "path": "/planets/{planetId}/image",
         "label": "all params",

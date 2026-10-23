@@ -4,10 +4,10 @@ from __future__ import annotations
 
 from typing_extensions import TypedDict
 
-__all__ = ["PlanetListAllDataParams"]
+__all__ = ["PlanetListParams"]
 
 
-class PlanetListAllDataParams(TypedDict, total=False):
+class PlanetListParams(TypedDict, total=False):
     limit: int
     """The number of items to return"""
 

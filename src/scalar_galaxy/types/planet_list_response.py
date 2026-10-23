@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from .._models import BaseModel
 
-__all__ = ["PlanetListAllDataResponse", "Meta"]
+__all__ = ["PlanetListResponse", "Meta"]
 
 
 class Meta(BaseModel):
@@ -17,7 +17,7 @@ class Meta(BaseModel):
     next: Optional[str] = None
 
 
-class PlanetListAllDataResponse(BaseModel):
+class PlanetListResponse(BaseModel):
     data: Optional[List[object]] = None
 
     meta: Optional[Meta] = None
