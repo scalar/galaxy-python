@@ -16,6 +16,8 @@ __all__ = [
     "RateLimitError",
     "InternalServerError",
     "APIWebhookValidationError",
+    "WebhookVerificationError",
+    "WebhookMissingHeadersError",
     "WebSocketConnectionClosedError",
     "WebSocketQueueFullError",
 ]
@@ -59,6 +61,23 @@ class APIResponseValidationError(APIError):
 
 class APIWebhookValidationError(APIError):
     pass
+
+
+try:
+    from standardwebhooks.webhooks import WebhookVerificationError as _StandardWebhooksVerificationError  # type: ignore
+except ImportError:
+
+    class WebhookVerificationError(GalaxyError):
+        """Raised when a webhook delivery's signature, timestamp or signed headers do not verify."""
+
+else:
+
+    class WebhookVerificationError(GalaxyError, _StandardWebhooksVerificationError):  # type: ignore
+        """Raised when a webhook delivery's signature, timestamp or signed headers do not verify."""
+
+
+class WebhookMissingHeadersError(WebhookVerificationError, ValueError):
+    """Raised when a webhook delivery lacks a signed header; it is also a `ValueError`, so `except ValueError` handlers catch it."""
 
 
 class APIStatusError(APIError):

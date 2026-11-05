@@ -16,6 +16,7 @@ The full API of this library can be found in [api.md](./api.md).
 - [Errors](#errors)
 - [Client Options](#client-options)
 - [Retries and Timeouts](#retries-and-timeouts)
+- [Webhooks](#webhooks)
 - [Helpers](#helpers)
 - [Logging](#logging)
 - [Requirements](#requirements)
@@ -161,6 +162,24 @@ Generated clients support request timeouts and retry temporary failures such as 
 
 <br />
 
+## Webhooks
+
+The webhook helper verifies the signature of each delivery your server receives, then decodes its body into a typed event. Pass it the request body exactly as it arrived, before any JSON parsing, together with the request headers: the signature covers the raw body, so one that was parsed and re-serialized fails verification. A delivery whose signature does not verify is rejected before it is decoded.
+
+```python
+# `payload` is the raw request body; `headers` holds the request headers.
+event = client.webhooks.unwrap(payload, headers=headers)
+```
+
+The signing secret comes from the client's `webhook_secret` option, which defaults to the `SCALAR_WEBHOOK_SECRET` environment variable. Pass `key` to use a different secret for one call.
+
+The same resource also has:
+
+- `client.webhooks.verify_signature(payload, headers)` checks a delivery's signature, and fails when it does not verify.
+- `client.webhooks.parse_unsafe(payload)` decodes a body into a typed event without checking its signature. Use it only for a body verified elsewhere, or in tests.
+
+<br />
+
 ## Helpers
 
 - Use `client.with_raw_response.<resource>.<method>(...)` to access the raw `httpx.Response` and parse it yourself.
@@ -172,6 +191,7 @@ Generated clients support request timeouts and retry temporary failures such as 
 
 - Set the `SCALAR_LOG` environment variable to `info` or `debug` to enable HTTP logging.
 - Logs are emitted through the standard `logging` module under the `scalar_galaxy` logger.
+- Importing the SDK wraps the process's log record factory: records from the SDK, `httpx`, `httpcore`, `hpack` and `websockets` loggers have credential headers, credential query parameters and URL userinfo logged as `***`. A record factory installed later that does not chain to the previous one turns this off.
 
 <br />
 
