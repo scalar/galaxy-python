@@ -1,6 +1,6 @@
 [project]
 name = "scalar-galaxy"
-version = "0.3.2" # x-release-please-version
+version = "0.4.0" # x-release-please-version
 description = "The Scalar Galaxy is an example OpenAPI document to test OpenAPI tools and libraries. It's a fictional universe with fictional planets and fictional data."
 readme = "README.md"
 license = "Apache-2.0"
@@ -13,13 +13,17 @@ dependencies = [
   "pydantic>=1.9.0, <3",
   "typing-extensions>=4.14, <5",
   "anyio>=3.5.0, <5",
-  "distro>=1.7.0, <2",
   "sniffio",
 ]
 
+[project.urls]
+Source = "https://github.com/scalar/galaxy-python"
+Issues = "https://github.com/scalar/galaxy-python/issues"
+Changelog = "https://github.com/scalar/galaxy-python/blob/main/CHANGELOG.md"
+
 [project.optional-dependencies]
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
-webhooks = ["standardwebhooks >= 1.0.1, < 2"]
+webhooks = []
 
 [build-system]
 requires = ["hatchling>=1.18.0"]

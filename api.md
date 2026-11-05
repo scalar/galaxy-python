@@ -40,11 +40,11 @@ It's easy to say you know them all, but do you really? Retrieve all the planets 
 
 | Direction | Type |
 | --- | --- |
-| Request | [`PlanetListAllDataParams`](./src/scalar_galaxy/types/planet_list_all_data_params.py) |
-| Response | [`PlanetListAllDataResponse`](./src/scalar_galaxy/types/planet_list_all_data_response.py) |
+| Request | [`PlanetListParams`](./src/scalar_galaxy/types/planet_list_params.py) |
+| Response | [`PlanetListResponse`](./src/scalar_galaxy/types/planet_list_response.py) |
 
 ```python
-planet = client.planets.list_all_data(
+planet = client.planets.list(
     limit=10,
     offset=0,
 )
@@ -111,11 +111,11 @@ Got a crazy good photo of a planet? Share it with the world!
 
 | Direction | Type |
 | --- | --- |
-| Request | [`PlanetDelteImageParams`](./src/scalar_galaxy/types/planet_delte_image_params.py) |
-| Response | [`PlanetDelteImageResponse`](./src/scalar_galaxy/types/planet_delte_image_response.py) |
+| Request | [`PlanetUploadImageParams`](./src/scalar_galaxy/types/planet_upload_image_params.py) |
+| Response | [`PlanetUploadImageResponse`](./src/scalar_galaxy/types/planet_upload_image_response.py) |
 
 ```python
-planet = client.planets.delte_image(
+planet = client.planets.upload_image(
     planet_id=1,
 )
 ```

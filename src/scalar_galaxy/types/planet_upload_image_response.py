@@ -7,10 +7,10 @@ from pydantic import Field as FieldInfo
 
 from .._models import BaseModel
 
-__all__ = ["PlanetDelteImageResponse"]
+__all__ = ["PlanetUploadImageResponse"]
 
 
-class PlanetDelteImageResponse(BaseModel):
+class PlanetUploadImageResponse(BaseModel):
     message: Optional[str] = None
 
     image_url: Optional[str] = FieldInfo(alias="imageUrl", default=None)

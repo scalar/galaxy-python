@@ -1,6 +1,7 @@
 # File generated from our OpenAPI spec by Scalar. See README.md for details.
 
 # Smoke test: calls every generated operation once to confirm the SDK can reach each endpoint.
+# It also checks that `with_options(environment=...)` moves a copy onto each environment's host.
 # Run it from this repo with `python tests/smoke-test.py`. The generator also runs this file
 # against a mock server and reads the JSON report produced via SCALAR_SMOKE_REPORT.
 from __future__ import annotations
@@ -14,7 +15,9 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Any, Callable, TypedDict
 
-from scalar_galaxy import Galaxy
+import httpx
+
+from scalar_galaxy import ENVIRONMENTS, Galaxy
 
 # The shared smoke-test runner injects base URL and credentials through the same
 # environment variables the generated client reads in normal use.
@@ -46,7 +49,7 @@ class SmokeCase(_SmokeCaseBase, total=False):
 
 
 def _smoke_case_0() -> None:
-    planet = client.planets.list_all_data(
+    planet = client.planets.list(
         limit=10,
         offset=0,
     )
@@ -115,13 +118,13 @@ def _smoke_case_6() -> None:
 
 
 def _smoke_case_7() -> None:
-    planet = client.planets.delte_image(
+    planet = client.planets.upload_image(
         planet_id=1,
     )
 
 
 def _smoke_case_8() -> None:
-    planet = client.planets.delte_image(
+    planet = client.planets.upload_image(
         planet_id=1,
         image=b"@mars.jpg",
     )
@@ -170,9 +173,25 @@ def _smoke_case_13() -> None:
     authentication = client.authentication.list_me()
 
 
+def _smoke_case_14() -> None:
+    original = client.base_url
+    copied = client.with_options(environment="production")
+    expected = str(httpx.URL(ENVIRONMENTS["production"])).rstrip("/")
+    assert str(copied.base_url).rstrip("/") == expected, f"copy kept {copied.base_url}, expected {expected}"
+    assert client.base_url == original, f"copy moved the original client to {client.base_url}"
+
+
+def _smoke_case_15() -> None:
+    original = client.base_url
+    copied = client.with_options(environment="void")
+    expected = str(httpx.URL(ENVIRONMENTS["void"])).rstrip("/")
+    assert str(copied.base_url).rstrip("/") == expected, f"copy kept {copied.base_url}, expected {expected}"
+    assert client.base_url == original, f"copy moved the original client to {client.base_url}"
+
+
 cases: list[SmokeCase] = [
     {
-        "operation": "listAllData",
+        "operation": "list",
         "method": "GET",
         "path": "/planets",
         "run": _smoke_case_0,
@@ -218,14 +237,14 @@ cases: list[SmokeCase] = [
         "run": _smoke_case_6,
     },
     {
-        "operation": "delteImage",
+        "operation": "uploadImage",
         "method": "POST",
         "path": "/planets/{planetId}/image",
         "label": "required params",
         "run": _smoke_case_7,
     },
     {
-        "operation": "delteImage",
+        "operation": "uploadImage",
         "method": "POST",
         "path": "/planets/{planetId}/image",
         "label": "all params",
@@ -265,15 +284,41 @@ cases: list[SmokeCase] = [
     },
 ]
 
+# Checks on the client itself rather than calls to an operation. They send no request, so they
+# run only beside at least one selected operation case and never make an empty run look green.
+client_cases: list[SmokeCase] = [
+    {
+        "operation": 'with_options(environment="production")',
+        "method": "CLIENT",
+        "path": "https://galaxy.scalar.com",
+        "run": _smoke_case_14,
+    },
+    {
+        "operation": 'with_options(environment="void")',
+        "method": "CLIENT",
+        "path": "https://void.scalar.com/",
+        "run": _smoke_case_15,
+    },
+]
+
 DEFAULT_SMOKE_CONCURRENCY = 32
 
 
-def _selected_cases() -> list[SmokeCase]:
+def _matching(candidates: list[SmokeCase]) -> list[SmokeCase]:
     filter_value = os.environ.get("SCALAR_SMOKE_FILTER")
     needles = [needle.strip() for needle in filter_value.split(",") if needle.strip()] if filter_value else []
     if not needles:
-        return cases
-    return [case for case in cases if any(needle in case["operation"] or needle in case["path"] for needle in needles)]
+        return candidates
+    return [
+        case for case in candidates if any(needle in case["operation"] or needle in case["path"] for needle in needles)
+    ]
+
+
+def _selected_cases() -> list[SmokeCase]:
+    selected = _matching(cases)
+    if not selected:
+        return selected
+    return selected + _matching(client_cases)
 
 
 def _smoke_concurrency(case_count: int) -> int:
