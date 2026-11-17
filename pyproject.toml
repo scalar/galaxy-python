@@ -25,6 +25,9 @@ Changelog = "https://github.com/scalar/galaxy-python/blob/main/CHANGELOG.md"
 aiohttp = ["aiohttp", "httpx_aiohttp>=0.1.9"]
 webhooks = []
 
+[dependency-groups]
+dev = ["pytest>=8.3.4"]
+
 [build-system]
 requires = ["hatchling>=1.18.0"]
 build-backend = "hatchling.build"
@@ -34,3 +37,6 @@ packages = ["src/scalar_galaxy"]
 
 [tool.ruff]
 line-length = 120
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
