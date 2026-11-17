@@ -25,8 +25,11 @@ from ._types import (
 from ._utils import is_given, is_mapping_t, get_async_library
 from ._compat import cached_property
 from ._exceptions import APIStatusError
+from ._models import SecurityOptions
 from ._base_client import (
     DEFAULT_MAX_RETRIES,
+    AuthLocations,
+    SchemeCredentials,
     SyncAPIClient,
     AsyncAPIClient,
 )
@@ -95,7 +98,8 @@ class Galaxy(SyncAPIClient):
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
         # Configure a custom httpx client.
-        # We provide a `DefaultHttpxClient` class that you can pass to retain the default values we use for `limits`, `timeout` & `follow_redirects`.
+        # We provide a `DefaultHttpxClient` class that you can pass to retain the default values we use for `limits` & `timeout`.
+        # The SDK follows redirects itself, whatever the client's `follow_redirects` says.
         # See the [httpx documentation](https://www.python-httpx.org/api/#client) for more details.
         http_client: httpx.Client | None = None,
         # Enable or disable schema validation for data returned by the API.
@@ -240,18 +244,42 @@ class Galaxy(SyncAPIClient):
         }
 
     @override
-    def _auth_query(self, security: dict[str, bool]) -> dict[str, str]:
-        _ = security
+    def _auth_query(self, security: SecurityOptions | None) -> dict[str, str]:
+        if security is not None:
+            return self._select_auth(security).query
         return {
             **self._api_key_query_query_auth,
         }
 
     @override
-    def _auth_cookies(self, security: dict[str, bool]) -> dict[str, str]:
-        _ = security
+    def _auth_cookies(self, security: SecurityOptions | None) -> dict[str, str]:
+        if security is not None:
+            return self._select_auth(security).cookies
         return {
             **self._api_key_cookie_cookie_auth,
         }
+
+    @property
+    @override
+    def _auth_by_scheme(self) -> dict[str, SchemeCredentials]:
+        return {
+            "basicAuth": SchemeCredentials(headers=self._basic_auth_header_auth),
+            "bearerAuth": SchemeCredentials(headers=self._bearer_auth_header_auth),
+            "apiKeyHeader": SchemeCredentials(headers=self._api_key_header_header_auth),
+            "oAuth2": SchemeCredentials(headers=self._o_auth2_header_auth),
+            "openIdConnect": SchemeCredentials(headers=self._open_id_connect_header_auth),
+            "apiKeyQuery": SchemeCredentials(query=self._api_key_query_query_auth),
+            "apiKeyCookie": SchemeCredentials(cookies=self._api_key_cookie_cookie_auth),
+        }
+
+    @property
+    @override
+    def _auth_locations(self) -> AuthLocations:
+        return AuthLocations(
+            headers=frozenset({"authorization", "x-api-key"}),
+            query=frozenset({"api_key"}),
+            cookies=frozenset({"api_key"}),
+        )
 
     @property
     def _basic_auth_header_auth(self) -> dict[str, str]:
@@ -457,7 +485,8 @@ class AsyncGalaxy(AsyncAPIClient):
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
         # Configure a custom httpx client.
-        # We provide a `DefaultAsyncHttpxClient` class that you can pass to retain the default values we use for `limits`, `timeout` & `follow_redirects`.
+        # We provide a `DefaultAsyncHttpxClient` class that you can pass to retain the default values we use for `limits` & `timeout`.
+        # The SDK follows redirects itself, whatever the client's `follow_redirects` says.
         # See the [httpx documentation](https://www.python-httpx.org/api/#asyncclient) for more details.
         http_client: httpx.AsyncClient | None = None,
         # Enable or disable schema validation for data returned by the API.
@@ -602,18 +631,42 @@ class AsyncGalaxy(AsyncAPIClient):
         }
 
     @override
-    def _auth_query(self, security: dict[str, bool]) -> dict[str, str]:
-        _ = security
+    def _auth_query(self, security: SecurityOptions | None) -> dict[str, str]:
+        if security is not None:
+            return self._select_auth(security).query
         return {
             **self._api_key_query_query_auth,
         }
 
     @override
-    def _auth_cookies(self, security: dict[str, bool]) -> dict[str, str]:
-        _ = security
+    def _auth_cookies(self, security: SecurityOptions | None) -> dict[str, str]:
+        if security is not None:
+            return self._select_auth(security).cookies
         return {
             **self._api_key_cookie_cookie_auth,
         }
+
+    @property
+    @override
+    def _auth_by_scheme(self) -> dict[str, SchemeCredentials]:
+        return {
+            "basicAuth": SchemeCredentials(headers=self._basic_auth_header_auth),
+            "bearerAuth": SchemeCredentials(headers=self._bearer_auth_header_auth),
+            "apiKeyHeader": SchemeCredentials(headers=self._api_key_header_header_auth),
+            "oAuth2": SchemeCredentials(headers=self._o_auth2_header_auth),
+            "openIdConnect": SchemeCredentials(headers=self._open_id_connect_header_auth),
+            "apiKeyQuery": SchemeCredentials(query=self._api_key_query_query_auth),
+            "apiKeyCookie": SchemeCredentials(cookies=self._api_key_cookie_cookie_auth),
+        }
+
+    @property
+    @override
+    def _auth_locations(self) -> AuthLocations:
+        return AuthLocations(
+            headers=frozenset({"authorization", "x-api-key"}),
+            query=frozenset({"api_key"}),
+            cookies=frozenset({"api_key"}),
+        )
 
     @property
     def _basic_auth_header_auth(self) -> dict[str, str]:
