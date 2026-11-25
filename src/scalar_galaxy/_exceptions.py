@@ -18,6 +18,7 @@ __all__ = [
     "APIWebhookValidationError",
     "WebhookVerificationError",
     "WebhookMissingHeadersError",
+    "EmptyWebhookSecretError",
     "WebSocketConnectionClosedError",
     "WebSocketQueueFullError",
 ]
@@ -78,6 +79,19 @@ else:
 
 class WebhookMissingHeadersError(WebhookVerificationError, ValueError):
     """Raised when a webhook delivery lacks a signed header; it is also a `ValueError`, so `except ValueError` handlers catch it."""
+
+
+try:
+    from standardwebhooks.webhooks import EmptyWebhookSecretError as _StandardWebhooksEmptySecretError  # type: ignore
+except ImportError:
+
+    class EmptyWebhookSecretError(GalaxyError, ValueError):
+        """Raised when a webhook signing key decodes to nothing; it is also a `ValueError`, so `except ValueError` handlers catch it."""
+
+else:
+
+    class EmptyWebhookSecretError(GalaxyError, ValueError, _StandardWebhooksEmptySecretError):  # type: ignore
+        """Raised when a webhook signing key decodes to nothing; it is also a `ValueError`, so `except ValueError` handlers catch it."""
 
 
 class APIStatusError(APIError):

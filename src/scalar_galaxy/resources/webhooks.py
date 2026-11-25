@@ -9,6 +9,7 @@ from .._types import HeadersLike
 from .._utils import get_required_header
 from .._models import construct_type
 from .._resource import SyncAPIResource, AsyncAPIResource
+from .._exceptions import EmptyWebhookSecretError
 from .._webhook_verify import verify_webhook_signature
 from ..types.parsed_webhook_event import ParsedWebhookEvent
 
@@ -32,7 +33,7 @@ class WebhooksResource(SyncAPIResource):
         except ValueError:
             empty_key = False
         if empty_key:
-            raise ValueError("Cannot verify a webhook with a key that decodes to an empty key")
+            raise EmptyWebhookSecretError("Cannot verify a webhook with a key that decodes to an empty key")
 
         if not isinstance(headers, dict):
             headers = dict(headers)
@@ -67,7 +68,7 @@ class WebhooksResource(SyncAPIResource):
         except ValueError:
             empty_key = False
         if empty_key:
-            raise ValueError("Cannot verify a webhook with a key that decodes to an empty key")
+            raise EmptyWebhookSecretError("Cannot verify a webhook with a key that decodes to an empty key")
 
         signed_headers = {
             "webhook-id": get_required_header(headers, "webhook-id"),
@@ -107,7 +108,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         except ValueError:
             empty_key = False
         if empty_key:
-            raise ValueError("Cannot verify a webhook with a key that decodes to an empty key")
+            raise EmptyWebhookSecretError("Cannot verify a webhook with a key that decodes to an empty key")
 
         if not isinstance(headers, dict):
             headers = dict(headers)
@@ -142,7 +143,7 @@ class AsyncWebhooksResource(AsyncAPIResource):
         except ValueError:
             empty_key = False
         if empty_key:
-            raise ValueError("Cannot verify a webhook with a key that decodes to an empty key")
+            raise EmptyWebhookSecretError("Cannot verify a webhook with a key that decodes to an empty key")
 
         signed_headers = {
             "webhook-id": get_required_header(headers, "webhook-id"),

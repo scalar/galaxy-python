@@ -39,6 +39,7 @@ from ._exceptions import (
     APIWebhookValidationError,
     WebhookVerificationError,
     WebhookMissingHeadersError,
+    EmptyWebhookSecretError,
 )
 from ._base_client import DefaultHttpxClient, DefaultAioHttpClient, DefaultAsyncHttpxClient
 from ._utils._logs import setup_logging as _setup_logging
@@ -65,6 +66,7 @@ __all__ = [
     "APIWebhookValidationError",
     "WebhookVerificationError",
     "WebhookMissingHeadersError",
+    "EmptyWebhookSecretError",
     "BadRequestError",
     "AuthenticationError",
     "PermissionDeniedError",
