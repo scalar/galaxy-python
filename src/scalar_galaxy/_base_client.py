@@ -1139,18 +1139,32 @@ class BaseClient(Generic[_HttpxClientT, _DefaultStreamT]):
         if idempotency_header and options.idempotency_key and idempotency_header not in headers:
             headers[idempotency_header] = options.idempotency_key
 
-        # Don't set these headers if they were already set or removed by the caller. We check
-        # `custom_headers`, which can contain `Omit()`, instead of `headers` to account for the removal case.
+        timeout = self.timeout if isinstance(options.timeout, NotGiven) else options.timeout
+        headers.update(self._attempt_headers(custom_headers, timeout=timeout, retries_taken=retries_taken))
+
+        return headers
+
+    def _attempt_headers(
+        self,
+        custom_headers: Mapping[str, object],
+        *,
+        timeout: float | Timeout | None,
+        retries_taken: int,
+    ) -> Dict[str, str]:
+        """The headers each attempt of a request to this API adds: its retry count and its read timeout.
+
+        Neither is added when the request's own headers (`custom_headers`, the call's) name it, set or
+        removed: `custom_headers` can hold `Omit()`, so it is checked rather than the merged headers.
+        """
+        headers: Dict[str, str] = {}
         lower_custom_headers = [header.lower() for header in custom_headers]
         if "x-scalar-retry-count" not in lower_custom_headers:
             headers["x-scalar-retry-count"] = str(retries_taken)
         if "x-scalar-read-timeout" not in lower_custom_headers:
-            timeout = self.timeout if isinstance(options.timeout, NotGiven) else options.timeout
             if isinstance(timeout, Timeout):
                 timeout = timeout.read
             if timeout is not None:
                 headers["x-scalar-read-timeout"] = str(timeout)
-
         return headers
 
     def _prepare_url(self, url: str) -> URL:
