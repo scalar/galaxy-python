@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/scalar/galaxy-python/compare/v0.4.0...v0.4.1) (2026-11-25)
+
+
+### Chores
+
+* **api:** update generated SDK content ([e06ca2b](https://github.com/scalar/galaxy-python/commit/e06ca2b1edb2ffc1d9a416c55a0473af9775be92))
+
 ## [0.4.0](https://github.com/scalar/galaxy-python/compare/v0.3.2...v0.4.0) (2026-11-25)
 
 
