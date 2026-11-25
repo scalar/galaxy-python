@@ -1,5 +1,32 @@
 # Changelog
 
+## [0.4.0](https://github.com/scalar/galaxy-python/compare/v0.3.2...v0.4.0) (2026-11-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **api:** 2 breaking changes to the SDK surface.
+    - Response of `planets.list` changed from `paginated_resource` to an unnamed `application/json` body.
+    - Removed schema `paginated_resource`.
+* **api:** 5 breaking changes to the SDK surface.
+    - Removed operation `planets.listAllData` (`GET /planets`).
+    - Removed operation `planets.delteImage` (`POST /planets/{planetId}/image`).
+    - Removed schema `ListAllDataResponseHeaders`.
+    - Removed schema `DelteImageResponseHeaders`.
+    - Removed schema `DelteImageStatus400ResponseHeaders`.
+
+### Features
+
+* **api:** remove operation planets.listAllData (+9 more changes) ([90d5509](https://github.com/scalar/galaxy-python/commit/90d550954fcc7440ca6d29f4de733844a887d052))
+* **api:** update response of planets.list (+2 more changes) ([b1f6475](https://github.com/scalar/galaxy-python/commit/b1f647588fd6c7684a911894a8f83db8e216e8be))
+
+
+### Chores
+
+* **api:** regenerate SDK ([26e65b9](https://github.com/scalar/galaxy-python/commit/26e65b92db265dbf89e30830f46166b7db09efa8))
+* **api:** regenerate SDK ([89ae96d](https://github.com/scalar/galaxy-python/commit/89ae96d3d7ed32cbe33a16ea551ebe771d4acf64))
+* **api:** update generated SDK content ([be4d0e3](https://github.com/scalar/galaxy-python/commit/be4d0e33c63b0cd19ccaf4b5860391b3f26606e4))
+
 ## [0.3.2](https://github.com/scalar/galaxy-python/compare/v0.3.1...v0.3.2) (2026-10-07)
 
 
